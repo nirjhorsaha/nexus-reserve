@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Bob Brown",
+    "rating": 4.5,
+    "review": "I've been using this product for a couple of weeks, and I'm really happy with it. It offers great value for the price and performs as expected. The only minor issue is the setup, which could be a bit more user-friendly.",
+    "avatar": "https://randomuser.me/api/portraits/men/1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "rating": 5,
+    "review": "Absolutely love this product! It exceeded my expectations in terms of quality and functionality. The delivery was quick, and everything arrived in perfect condition. Highly recommend to anyone considering a purchase.",
+    "avatar": "https://randomuser.me/api/portraits/women/2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Alice Johnson",
+    "rating": 3,
+    "review": "The product is decent but has some drawbacks. While it works well enough, there are a few design flaws that could be improved. It's okay for the price, but I was hoping for better overall performance.",
+    "avatar": "https://randomuser.me/api/portraits/women/3.jpg"
+  }
+]
