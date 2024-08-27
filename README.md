@@ -1,25 +1,16 @@
-# MechArcade
+#  Nexus Reserve
 
-## Introduction
+<!-- ## Overview -->
 
-Welcome to `MechArcade`, your premier destination for mechanical keyboards. Whether you're a gaming enthusiast, a coding maestro, or a productivity guru, `MechArcade` offers the perfect keyboard to suit your needs.
+Welcome to the `Nexus Reserve`, a platform designed to simplify and streamline the process of booking meeting rooms in co-working spaces. This system provides an intuitive user interface for both users and administrators, ensuring a seamless experience from booking to management.
 
 ## Table of Contents
 
-- [MechArcade](#mecharcade)
-  - [Introduction](#introduction)
+- [Nexus Reserve](#nexus-reserve)
   - [Table of Contents](#table-of-contents)
-  - [Project Description](#project-description)
-    - [Purpose and Goals](#purpose-and-goals)
+  - [Key Objectives](#key-objectives)
   - [Features](#features)
-    - [Homepage](#homepage)
-    - [Products Page](#products-page)
-    - [Product Details Page](#product-details-page)
-    - [Cart Page](#cart-page)
-    - [Checkout Page](#checkout-page)
-    - [Product Management/Dashboard](#product-managementdashboard)
-    - [About Us Page](#about-us-page)
-    - [Contact Us Page](#contact-us-page)
+  - [Purpose and Goals](#purpose-and-goals)
     - [Others Features](#others-features)
   - [Technology Stack](#technology-stack)
   - [Installation Guideline](#installation-guideline)
@@ -34,85 +25,59 @@ Welcome to `MechArcade`, your premier destination for mechanical keyboards. Whet
       - [Backend](#backend-1)
   - [Contributing](#contributing)
 
-## Project Description
 
-`MechArcade` is an innovative e-commerce platform dedicated to delivering an exceptional shopping experience for mechanical keyboard enthusiasts. Our website features a sleek and intuitive design, offering seamless navigation and robust functionality. Key highlights include:
+## Key Objectives
 
--   **Homepage**: A captivating entry point showcasing featured products and top brands.
--   **Product Pages**: Detailed listings with comprehensive descriptions, customer reviews, and purchasing options.
--   **Cart and Checkout**: A streamlined process for adding items to cart, managing quantities, and secure checkout with payment integration.
--   **Admin Dashboard**: Tools for product management, including inventory control, updates, and analytics.
--   **About Us and Contact Us**: Pages providing insights into our mission, team, and ways to connect.
-
-### Purpose and Goals
-
-The primary purpose of `MechArcade` is to provide mechanical keyboard enthusiasts with a dedicated online platform where they can easily browse and purchase mechanical keyboards and accessories. Our goals are:
-
--   To offer a comprehensive and user-friendly shopping experience.
--   To provide robust tools for administrators to manage products efficiently.
--   To ensure secure transactions with optional Stripe integration.
--   To create a responsive and aesthetically pleasing website that enhances user interaction.
+-   **User-Friendly Interface:** Create an intuitive and easy-to-navigate interface for users to search, view, and book meeting rooms.
+-   **Efficient Room Management:** Allow administrators to `manage rooms`, `time slots`, and `bookings` effectively with real-time updates.
+-   **Secure Transactions:** Implement secure payment processing and user authentication to protect sensitive information.
+-   **Responsive Design:** Ensure the application is fully responsive and functional across different devices and screen sizes.
 
 ## Features
 
--   **Responsive Design**: Optimized for all devices.
--   **User-Friendly Interface**: Intuitive navigation and clean design.
+-   **Homepage:** A visually appealing entry with easy navigation to explore featured rooms and services.
+-   **Meeting Rooms Page:** Detailed listings of available rooms with search, filter, and sorting options to find the perfect space.
+-   **Booking Process:** A user-friendly form for selecting dates, times, and booking details, with secure payment integration.
+-   **About Us and Contact Us Pages:** Insightful information about our mission and team, along with an easy-to-use contact form for inquiries.
 
-### Homepage
+**For Users:**
 
--   **Service Ads**: Free shipping, 24/7 support.
--   **Featured Products**: Latest 6 products.
--   **Top Brands**: Popular brand logos.
--   **Customer Reviews**: Testimonials carousel.
--   **Extra Sections**: Insights on mechanical keyboards.
+-   **Browse and Book Rooms:** Users can easily search for `available meeting rooms`, `view detailed information`, and `book spaces` that fit their needs.
+-   **Real-Time Availability:** View up-to-date availability to avoid scheduling conflicts and make informed decisions.
+-   **Streamlined Booking Process:** Select dates and times, complete the booking, and make secure payments with ease.
 
-### Products Page
+**For Administrators:**
 
--  Product Listings: View all products with images, names, and prices.
--  Search & Filters: Find products by name, brand and price range.
--  Sorting Options: Sort products by price.
+-   **Room Management:** Admins can add, update, or delete rooms, `manage availability slots`, and `monitor bookings` through a comprehensive dashboard.
+-   **Booking Oversight:** Approve, reject, or modify bookings, and manage booking statuses efficiently.
+-   **Real-Time Updates:** Ensure all changes are reflected immediately to maintain accurate records.
 
-### Product Details Page
 
--   Detailed Info: View product specs, images, and reviews.
--   Add-to-Cart: Easily add items to the cart with stock updates..
+## Purpose and Goals
 
-### Cart Page
+1.  **Enhance User Experience:** Provide an intuitive and seamless booking process with real-time room availability.
+    
+2.  **Streamline Room Management:** Equip admins with efficient tools for managing rooms and bookings, ensuring accuracy with real-time updates.
+    
+3.  **Ensure Secure Transactions:** Protect user data and payment information with secure processing and reliable payment gateways.
+    
+4.  **Promote Flexibility:** Allow 24/7 access for room bookings with customizable options to meet various needs.
+    
+5.  **Support Administrative Efficiency:** Offer a comprehensive admin dashboard with reporting and analytics to optimize management.
 
--   Cart Management: Adjust quantities or remove items.
--   Pricing Overview: See subtotal, taxes, and total cost.
-
-### Checkout Page
-
--   User Details: Enter shipping info and choose payment methods.
--   Payment Options: Includes Cash on Delivery and Stripe.
-
-### Product Management/Dashboard
-
--   Manage Product: Manage products with add, update, and delete options.
--   Product Table: View and edit all products in real-time..
-
-### About Us Page
-
--   Brand Story: Learn about the mission and team with engaging design.
-
-### Contact Us Page
-
--   Contact Info: Find ways to reach out and an interactive form for inquiries.
 
 ### Others Features
 
 -   **Debounce API Calls**: Efficient search functionality.
--   **Page Refresh Warning**: Prevents cart data loss.
--   **Animations**: Enhances user interaction.
--   **Stripe Payment Integration**: Secure payment processing.
--   **Pagination**: Custom pagination on the Products page.
+-   **Scroll to Top Button**: Allowing users to quickly return to the top of the page.
+-   **Payment Integration**: Secure payment processing.
+-   **Pagination**: Custom pagination on the Rooms page.
 
 ## Technology Stack
 
 -   **Frontend**: `React` with `Vite` for building an interactive and high-performance user interface.
--   **State Management**: `Redux` and `RTK Query` for managing application state and server data efficiently.
 -   **Backend**: `Node.js` and `Express.js` for building a robust server-side application.
+-   **State Management**: `Redux` and `RTK Query` for managing application state and server data efficiently.
 -   **Database**: `MongoDB` with `Mongoose` for efficient data storage and retrieval.
 -   **Authentication**: `JSON Web Tokens (JWT)` for secure user authentication and authorization.
 -   **Validation**: `Zod` for schema validation and ensuring data integrity.
@@ -131,8 +96,8 @@ The primary purpose of `MechArcade` is to provide mechanical keyboard enthusiast
 1.  **Clone the repository**:
 
     ```bash
-    git clone https://github.com/nirjhorsaha/mechArcade-frontend.git
-    cd mecharcade-frontend
+    git clone https://github.com/nirjhorsaha/nexus-reserve.git
+    cd nexus-reserve
     ```
 
 2.  **Install dependencies**:
@@ -141,19 +106,13 @@ The primary purpose of `MechArcade` is to provide mechanical keyboard enthusiast
     npm install
     ```
 
-3.  **Create a `.env` file** in the root directory and add necessary configuration variables:
-
-    ```bash
-    VITE_API_URL=http://localhost:5173/
-    ```
-
-4.  **Start the development server**:
+3.  **Start the development server**:
 
     ```bash
     npm run dev
     ```
 
-5.  **Build the project for production**:
+4.  **Build the project for production**:
 
     ```bash
     npm run build
@@ -164,8 +123,8 @@ The primary purpose of `MechArcade` is to provide mechanical keyboard enthusiast
 1.  **Clone the repository**:
 
     ```bash
-    git clone https://github.com/nirjhorsaha/mechArcade-backend.git
-    cd mecharcade-backend
+    git clone https://github.com/nirjhorsaha/nexus-reserve-server.git
+    cd nexus-reserve-server
     ```
 
 2.  **Install dependencies**:
@@ -174,15 +133,7 @@ The primary purpose of `MechArcade` is to provide mechanical keyboard enthusiast
     npm install
     ```
 
-3.  **Create a `.env` file** in the root directory and add necessary configuration variables:
-
-    ```bash
-    PORT = 5000
-    DB_URL = <your_mongodb_connection_uri>
-    JWT_SECRET = <your_jwt_secret>
-    ```
-
-4.  **Start the development server**:
+3.  **Start the development server**:
 
     ```bash
     npm run dev
