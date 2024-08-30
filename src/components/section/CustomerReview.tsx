@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import { Carousel, Rate } from 'antd';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import reviewsData from '../../data/reviews.json';
 import { GoCodeReview } from "react-icons/go";
 import Section from '@/pages/Shared/Section';
+import '../CustomerReview.css'; // Import custom CSS file for additional styling
+import reviewsData from '.././../data/reviews.json'
+
 
 const CustomerReview: React.FC = () => {
   useEffect(() => {
@@ -12,24 +14,27 @@ const CustomerReview: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-white py-12">
+    <div className=" py-12 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Section
           icon={GoCodeReview}
           title="Customer Reviews"
           subtitle="See what our customers are saying about us!"
         />
-        <Carousel autoplay>
+        <Carousel autoplay dotPosition="bottom" effect="fade">
           {reviewsData.map((review) => (
-            <div key={review?.id} className="bg-gray-100 p-8 rounded-lg">
-              <div className="flex items-center mb-4 ">
-                <img src={review.image} alt={review?.name} className="w-12 h-12 rounded-full mr-4" />
+            <div key={review?.id} className="carousel-slide bg-gray-50 shadow-lg rounded-lg overflow-hidden">
+              <div className="p-6 flex items-center">
+                <img src={review.image} alt={review?.name} className="w-16 h-16 rounded-full border-2 border-gray-300 mr-4" />
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800">{review?.name}</h3>
-                  <Rate allowHalf defaultValue={review?.rating} />
+                  <h3 className="text-xl font-semibold text-gray-800 mb-1">{review?.name}</h3>
+                  <p className="text-sm text-gray-500 mb-2">{review?.role}</p>
+                  <Rate allowHalf disabled defaultValue={review?.rating} />
                 </div>
               </div>
-              <p className="text-gray-600">{review?.text}</p>
+              <div className="p-6 border-t border-gray-200">
+                <p className="text-gray-700 text-base">{review?.text}</p>
+              </div>
             </div>
           ))}
         </Carousel>
