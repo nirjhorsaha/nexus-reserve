@@ -4,32 +4,32 @@ import logo2 from "../../assets/logo-2.png";
 import { FaFacebookF, FaInstagram, FaTwitter, FaGithub, FaDribbble, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 
 const socialLinks = [
-  { href: "#", icon: <FaFacebookF className='size-5' />, label: "Facebook" },
-  { href: "#", icon: <FaInstagram className='size-5' />, label: "Instagram" },
-  { href: "#", icon: <FaTwitter className='size-5' />, label: "Twitter" },
-  { href: "#", icon: <FaGithub className='size-5' />, label: "GitHub" },
-  { href: "#", icon: <FaDribbble className='size-5' />, label: "Dribbble" }
+    { href: "#", icon: <FaFacebookF className='size-5' />, label: "Facebook" },
+    { href: "#", icon: <FaInstagram className='size-5' />, label: "Instagram" },
+    { href: "#", icon: <FaTwitter className='size-5' />, label: "Twitter" },
+    { href: "#", icon: <FaGithub className='size-5' />, label: "GitHub" },
+    { href: "#", icon: <FaDribbble className='size-5' />, label: "Dribbble" }
 ];
 
 const FooterLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
-  <Link to={to} className="text-black transition hover:text-blue-600">
-    {children}
-  </Link>
+    <Link to={to} className="text-black transition hover:text-blue-600">
+        {children}
+    </Link>
 );
 
 const FooterSection = ({ title, links }: { title: string; links: { to: string; text: string }[] }) => (
-  <div className="text-center sm:text-left">
-    <p className="text-xl font-medium text-blue-600">{title}</p>
-    <nav className="mt-8">
-      <ul className="space-y-4 text-sm">
-        {links.map(({ to, text }, index) => (
-          <li key={index}>
-            <FooterLink to={to}>{text}</FooterLink>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  </div>
+    <div className="text-center sm:text-left">
+        <p className="text-xl font-medium text-blue-600">{title}</p>
+        <nav className="mt-8">
+            <ul className="space-y-4 text-sm">
+                {links.map(({ to, text }, index) => (
+                    <li key={index}>
+                        <FooterLink to={to}>{text}</FooterLink>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+    </div>
 );
 
 
