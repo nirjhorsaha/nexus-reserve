@@ -9,7 +9,7 @@ const Hero = () => {
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
             <div className="text-center lg:text-left">
-              <h1 className="text-2xl font-bold text-black lg:mt-8 xl:text-6xl">
+              <h1 className="text-4xl font-bold text-black lg:mt-8 xl:text-6xl">
                 Book Your Ideal Meeting Room with Ease.
               </h1>
               <p className="mt-4 text-base text-black lg:mt-8 sm:text-xl">
@@ -17,7 +17,7 @@ const Hero = () => {
               </p>
 
               <Link
-                to="/meeting-rooms"
+                to="/meeting-room"
                 className="inline-flex items-center px-8 py-4 mt-8 font-semibold text-white bg-gradient-to-r from-blue-400 to-blue-600 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
                 Book Now
                 <svg className="w-6 h-6 ml-8 -mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
