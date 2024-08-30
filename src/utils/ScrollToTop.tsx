@@ -31,9 +31,8 @@ const ScrollToTopButton: React.FC = () => {
     return (
         <button
             onClick={scrollToTop}
-            className={`fixed bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full shadow-lg transition-opacity duration-300 ${
-                showButton ? 'opacity-100' : 'opacity-0'
-            } sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-10 lg:right-10`}
+            className={`fixed bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full shadow-lg transition-opacity duration-300 ${showButton ? 'opacity-100' : 'opacity-0'
+                } sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 lg:bottom-10 lg:right-10`}
             aria-label="Scroll to top"
         >
             <FaArrowUp />
