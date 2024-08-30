@@ -1,6 +1,6 @@
-import Cashback from '../../assets/service/Cashback.png';
-import FreeShipping from '../../assets/service/FreeShipping.png';
-import Payment from '../../assets/service/Payment.png';
+import RealTimeAvailability from '../../assets/service/RealTimeAvailability.png';
+import InstantBookingConfirmation from '../../assets/service/InstantBookingConfirmation.png';
+import FlexibleScheduling from '../../assets/service/FlexibleScheduling.png';
 import Support from '../../assets/service/Support.png';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
@@ -14,26 +14,26 @@ const Service = () => {
   const services = useMemo(() => [
     {
       id: 1,
-      name: 'Free Shipping',
-      description: 'Enjoy free shipping on all orders, no minimum purchase required.',
-      image: FreeShipping
+      name: 'Real-Time Availability',
+      description: 'View current availability of meeting rooms instantly.',
+      image: RealTimeAvailability
     },
     {
       id: 2,
-      name: 'Quick Payment',
-      description: 'Hassle-free checkout with quick payment options.',
-      image: Payment
+      name: 'Instant Booking Confirmation',
+      description: 'Get immediate confirmation of your booking.',
+      image: InstantBookingConfirmation
     },
     {
       id: 3,
-      name: 'Big Cashback',
-      description: 'Earn big cashback rewards on your purchases.',
-      image: Cashback
+      name: 'Flexible Scheduling',
+      description: 'Adjust your schedule to fit your needs.',
+      image: FlexibleScheduling
     },
     {
       id: 4,
       name: '24/7 Support',
-      description: 'Need assistance? Our dedicated support team is available around the clock to help.',
+      description: 'Round-the-clock assistance whenever you need it.',
       image: Support
     },
   ], []);
@@ -52,16 +52,17 @@ const Service = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
           {services.map(service => (
             <div 
-              key={service.id} 
+              key={service?.id} 
               className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300" 
               data-aos="zoom-in"
             >
-              <img 
-                className="w-full h-auto mb-2 object-contain md:w-48 md:h-20" 
-                src={service.image} 
-                alt={service.name} 
+              <img  
+                className="w-full h-auto mb-2 object-contain md:w-52 md:h-24" 
+                src={service?.image} 
+                alt={service?.name} 
               />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.name}</h3>
+              <p className="text-sm text-gray-600 text-center">{service.description}</p>
             </div>
           ))}
         </div>
