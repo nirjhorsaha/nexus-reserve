@@ -51,15 +51,15 @@ const Service = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
           {services.map(service => (
-            <div 
-              key={service?.id} 
-              className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300" 
+            <div
+              key={service?.id}
+              className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300"
               data-aos="zoom-in"
             >
-              <img  
-                className="w-full h-auto mb-2 object-contain md:w-52 md:h-24" 
-                src={service?.image} 
-                alt={service?.name} 
+              <img
+                className="w-full h-auto mb-2 object-contain md:w-52 md:h-24"
+                src={service?.image}
+                alt={service?.name}
               />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.name}</h3>
               <p className="text-sm text-gray-600 text-center">{service.description}</p>
