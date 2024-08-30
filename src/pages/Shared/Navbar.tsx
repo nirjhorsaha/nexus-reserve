@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
             aria-label="Dropdown menu"
           >
             <li><CustomNavLink to="/">Home</CustomNavLink></li>
-            <li><CustomNavLink to="/products">Meeting Rooms</CustomNavLink></li>
+            <li><CustomNavLink to="/meeting-room">Meeting Rooms</CustomNavLink></li>
             <li><CustomNavLink to="/about">About Us</CustomNavLink></li>
             <li><CustomNavLink to="/contact">Contact Us</CustomNavLink></li>
           </ul>
@@ -113,7 +113,7 @@ const Navbar: React.FC = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li><CustomNavLink to="/">Home</CustomNavLink></li>
-          <li><CustomNavLink to="/products">Meeting Rooms</CustomNavLink></li>
+          <li><CustomNavLink to="/meeting-room">Meeting Rooms</CustomNavLink></li>
           <li><CustomNavLink to="/about">About Us</CustomNavLink></li>
           <li><CustomNavLink to="/contact">Contact Us</CustomNavLink></li>
         </ul>
