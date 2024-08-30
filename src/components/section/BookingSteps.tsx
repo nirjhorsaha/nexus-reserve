@@ -48,13 +48,13 @@ const BookingSteps: React.FC = () => {
                         {steps.map((step, index) => (
                             <div key={index}>
                                 <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
-                                    <span className="text-xl font-semibold text-gray-700">{step.number}</span>
+                                    <span className="text-xl font-semibold text-gray-700">{step?.number}</span>
                                 </div>
                                 <div className="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
-                                    {step.icon}
-                                    <h3 className="mt-2">{step.title}</h3>
+                                    {step?.icon}
+                                    <h3 className="mt-2">{step?.title}</h3>
                                 </div>
-                                <p className="mt-4 text-base text-gray-600">{step.description}</p>
+                                <p className="mt-4 text-base text-gray-600">{step?.description}</p>
                             </div>
                         ))}
                     </div>
