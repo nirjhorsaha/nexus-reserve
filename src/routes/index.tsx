@@ -1,5 +1,6 @@
 import MainLayout from "@/components/layout/MainLayout";
 import AboutUs from "@/pages/AboutUs";
+import AdminDashboard from "@/pages/admin/AdminDashboard";
 import ContactUs from "@/pages/ContactUs";
 import HomePage from "@/pages/HomePage";
 import ErrorPage from "@/pages/Shared/ErrorPage";
@@ -15,16 +16,12 @@ const router = createBrowserRouter([{
   children: [
     {
       index: true,
-      element: <HomePage/>,
+      element: <HomePage />,
     },
-    // {
-    //   path: "/products",
-    //   element: <Products />
-    // },
-    // {
-    //   path: "/product/:id",
-    //   element: <ProductDetails />,
-    // },
+    {
+      path: "/admin",
+      element: <AdminDashboard />
+    },
     {
       path: "/about",
       element: <AboutUs />

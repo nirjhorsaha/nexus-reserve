@@ -14,7 +14,7 @@ const Section: FC<SectionProps> = ({ icon: Icon, title, subtitle }) => {
         <div className="hidden sm:block">
           <Icon className="text-blue-600 mr-2 text-3xl" />
         </div>
-        <h2 className="text-3xl font-semibold text-blue-600 mb-1 tracking-wide">{title}</h2>
+        <h2 className="text-3xl font-semibold text-blue-600  mb-1 tracking-wide">{title}</h2>
       </div>
       <h3 className="text-lg font-medium text-gray-600 mb-5">{subtitle}</h3>
     </div>

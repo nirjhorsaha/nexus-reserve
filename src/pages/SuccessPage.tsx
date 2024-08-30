@@ -8,7 +8,7 @@ const SuccessPage: React.FC = () => {
   return (
     <div>
       <Helmet>
-        <title>Order - Mech Arcade</title>
+        <title>Order - Nexus Reserve</title>
       </Helmet>
       <div className="flex flex-col items-center justify-center min-h-screen">
         <div className=" mx-auto text-center bg-white p-8 rounded-lg shadow-lg">
