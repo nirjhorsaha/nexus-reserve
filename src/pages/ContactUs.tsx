@@ -1,16 +1,22 @@
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi';
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 const ContactUs = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className="min-h-screen flex items-center justify-center">
-            <Helmet>
-                <title>Contact Us - Nexus Reserve</title>
-            </Helmet>
+            <HelmetProvider>
+                <Helmet>
+                    <title>Contact Us - Nexus Reserve</title>
+                </Helmet>
+            </HelmetProvider>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <motion.div 
+                    <motion.div
                         className="flex flex-col justify-center"
                         initial={{ opacity: 0, x: -100 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -50,7 +56,7 @@ const ContactUs = () => {
                             </div>
                         </div>
                     </motion.div>
-                    <motion.form 
+                    <motion.form
                         className="flex flex-col space-y-4"
                         initial={{ opacity: 0, x: 100 }}
                         animate={{ opacity: 1, x: 0 }}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion } from "framer-motion";
 
 
@@ -11,6 +11,10 @@ interface TeamMember {
 
 const AboutUs: React.FC = () => {
     const [team, setTeam] = useState<TeamMember[]>([]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         // Define your team members here
@@ -52,9 +56,11 @@ const AboutUs: React.FC = () => {
 
     return (
         <div>
-            <Helmet>
-                <title>About Us - Nexus Reserve</title>
-            </Helmet>
+            <HelmetProvider>
+                <Helmet>
+                    <title>About Us - Nexus Reserve</title>
+                </Helmet>
+            </HelmetProvider>
             <div className="p-8">
                 {/* <div className="container mx-auto"> */}
                 <div className="mx-auto">
@@ -100,8 +106,7 @@ const AboutUs: React.FC = () => {
                                 <motion.div
                                     key={index}
                                     className="bg-white p-6 rounded-lg shadow-lg"
-                                    variants={itemVariants}
-                                    >
+                                    variants={itemVariants}>
                                     <img
                                         className="w-24 h-24 rounded-full mx-auto mb-4"
                                         src={member.imageUrl}
