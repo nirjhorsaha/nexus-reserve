@@ -35,15 +35,14 @@ const FooterSection = ({ title, links }: { title: string; links: { to: string; t
 
 const Footer = () => (
     <footer className="bg-gray-200">
-        <div className="max-w-screen-xl px-4 pt-16 pb-6 mx-auto">
+        <div className="max-w-screen-xl px-4 pt-12 pb-6 mx-auto">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                 <div>
                     <div className="flex justify-center text-teal-300 sm:justify-start">
                         <img src={logo2} alt="Logo" className="h-24 lg:h-32" />
                     </div>
-                    <p className="max-w-md mx-auto mt-6 leading-relaxed text-center text-black sm:max-w-xs sm:mx-0 sm:text-left">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
-                        consequuntur amet culpa cum itaque neque.
+                    <p className="max-w-lg mx-auto mt-4 leading-relaxed text-center text-black sm:max-w-xs sm:mx-0 sm:text-left">
+                        Nexus Reserve – Where your meeting needs are met with excellence.
                     </p>
                     <ul className="flex justify-center gap-6 mt-8 md:gap-8 sm:justify-start">
                         {socialLinks.map(({ href, icon, label }) => (
@@ -73,7 +72,7 @@ const Footer = () => (
                     <FooterSection
                         title="Our Services"
                         links={[
-                            { to: "/products", text: "Products" },
+                            { to: "/meeting-room", text: "Rooms" },
                             { to: "/dashboard", text: "Dashboard" },
                         ]}
                     />

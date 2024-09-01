@@ -1,20 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 // import logo1 from '../../assets/logo-1.png';
 import logo2 from '../../assets/logo-2.png';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { logout, selectCurrentUser } from '@/redux/features/auth/authSlice';
+import { logout, useCurrentToken } from '@/redux/features/auth/authSlice';
 import { Button, Dropdown, MenuProps } from 'antd';
 import { UserOutlined, LogoutOutlined, LoginOutlined } from '@ant-design/icons';
+import { verifyToken } from '@/utils/verifyToken';
 
-
-// import { useSelector } from 'react-redux';
-// import { RootState } from '@/redux/store';
+interface IUser {
+  role: 'user' | 'admin'; // Adjust roles based on your actual roles
+  // Add other properties if necessary
+}
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isUser = useAppSelector(selectCurrentUser);
+  const token = useAppSelector(useCurrentToken);
+
+
+  const [isUser, setIsUser] = useState<IUser | null>(null);
+  console.log({ isUser })
+
+  useEffect(() => {
+    if (token) {
+      const user = verifyToken(token);
+      console.log('Verified User:', user); // Check if the user object is correct
+      setIsUser(user);
+    } else {
+      setIsUser(null);
+    }
+  }, [token]);
+
+
+  // let isUser;
+  // console.log({isUser});
+
+  // if (token) {
+  //   isUser = verifyToken(token);
+  // }
 
   // Reusable NavLink component
   const CustomNavLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
@@ -39,7 +63,7 @@ const Navbar: React.FC = () => {
       {
         key: 'mybooking',
         label: (
-          <NavLink to={isUser?.role === 'user' ? '/my-bookings' : '/dashboard'}
+          <NavLink to={isUser?.role === 'user' ? `/${isUser?.role}/my-bookings` : `/${isUser?.role}/dashboard`}
             className="dropdown-item">
             <Button type="text" icon={<UserOutlined />}
             >
@@ -74,10 +98,17 @@ const Navbar: React.FC = () => {
 
 
   return (
-    <div className="navbar bg-base-100  mb-5">
+    <div style={{
+      position: 'sticky',
+      top: 0,
+      zIndex: 1000,
+      backgroundColor: '#fff',
+    }} className="navbar bg-base-100 mb-5">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden" aria-label="Toggle navigation" aria-haspopup="true" aria-expanded="false">
+          <div tabIndex={0} role="button"
+            className="btn btn-ghost lg:hidden"
+            aria-label="Toggle navigation" aria-haspopup="true" aria-expanded="false">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
