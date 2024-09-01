@@ -19,3 +19,4 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({ to, text, className = '' }) => 
 };
 
 export default ButtonLink;
+

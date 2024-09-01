@@ -1,4 +1,3 @@
-// src/components/Shared/Loading.tsx
 import React from 'react';
 import { GridLoader } from 'react-spinners';
 
