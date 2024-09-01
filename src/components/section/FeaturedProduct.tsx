@@ -47,7 +47,7 @@
 //     );
 //   }
 
-//   // Extract products data 
+//   // Extract products data
 //   const products = data?.data?.result as Product[];
 
 //   if (!products || products?.length === 0) {

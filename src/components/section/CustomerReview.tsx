@@ -4,9 +4,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { GoCodeReview } from "react-icons/go";
 import Section from '@/pages/Shared/Section';
-import '../CustomerReview.css'; // Import custom CSS file for additional styling
+import '../styles/CustomerReview.css';
 import reviewsData from '.././../data/reviews.json'
-
 
 const CustomerReview: React.FC = () => {
   useEffect(() => {
@@ -33,7 +32,7 @@ const CustomerReview: React.FC = () => {
                 </div>
               </div>
               <div className="p-6 border-t border-gray-200">
-                <p className="text-gray-700 text-base">{review?.text}</p>
+                <p className="text-gray-700 text-base italic">"{review?.text}"</p>
               </div>
             </div>
           ))}
