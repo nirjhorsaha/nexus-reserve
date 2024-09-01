@@ -5,14 +5,13 @@ import { Outlet } from "react-router-dom";
 import Container from "./Container";
 import ScrollToTopButton from "@/utils/ScrollToTop";
 
-
 const MainLayout = () => {
     // useCartWarning(); // global cart warning
 
     return (
-        <main className="font-Nunito">
+        <main className="font-Nunito"  >
             <div data-theme="light">
-                <ScrollToTopButton  />
+                <ScrollToTopButton />
                 <Container className="min-h-screen">
                     <NavBar />
                     <Outlet />

@@ -1,10 +1,12 @@
-import './App.css'
 import MainLayout from './components/layout/MainLayout'
+import ProtectedRoute from './components/layout/ProtectedRoute'
 
 const App: React.FC = () => {
   return (
     <div>
-      <MainLayout />
+      <ProtectedRoute role={'undefined'}>
+        <MainLayout />
+      </ProtectedRoute>
     </div>
   )
 }
