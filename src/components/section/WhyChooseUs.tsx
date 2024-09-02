@@ -4,33 +4,15 @@ import Section from '@/pages/Shared/Section';
 import { MdOutlineQuestionAnswer } from 'react-icons/md';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { features } from '@/data/FeaturesItem';
 
-const features = [
-    {
-        title: 'Seamless Booking Experience',
-        description: 'Experience a smooth and easy booking process with our user-friendly interface.',
-        icon: <CheckCircleOutlined className="text-blue-600 text-4xl" />,
-        aos: 'fade-up',
-    },
-    {
-        title: 'Secure Transactions',
-        description: 'Your transactions are safeguarded with advanced security protocols.',
-        icon: <SecurityScanOutlined className="text-green-600 text-4xl" />,
-        aos: 'fade-up',
-    },
-    {
-        title: '24/7 Customer Support',
-        description: 'We’re here to assist you anytime, with round-the-clock customer service.',
-        icon: <CustomerServiceOutlined className="text-yellow-600 text-4xl" />,
-        aos: 'fade-up',
-    },
-    {
-        title: 'Wide Range of Options',
-        description: 'Explore a variety of services tailored to meet all your needs.',
-        icon: <AppstoreOutlined className="text-purple-600 text-4xl" />,
-        aos: 'fade-up',
-    },
-];
+// Create a mapping of icon names to actual icons
+const iconMap: { [key: string]: React.ReactNode } = {
+    CheckCircleOutlined: <CheckCircleOutlined className="text-blue-600 text-4xl" />,
+    SecurityScanOutlined: <SecurityScanOutlined className="text-green-600 text-4xl" />,
+    CustomerServiceOutlined: <CustomerServiceOutlined className="text-yellow-600 text-4xl" />,
+    AppstoreOutlined: <AppstoreOutlined className="text-purple-600 text-4xl" />,
+};
 
 const WhyChooseUs: React.FC = () => {
 
@@ -39,7 +21,7 @@ const WhyChooseUs: React.FC = () => {
     }, []);
 
     return (
-        <section className="py-16 bg-white">
+        <div className="bg-white py-12 max-w-7xl mx-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <Section
                     icon={MdOutlineQuestionAnswer}
@@ -55,7 +37,7 @@ const WhyChooseUs: React.FC = () => {
                             data-aos-delay={index * 100} // Staggered delay
                         >
                             <div className="flex items-center justify-center mb-4">
-                                {feature.icon}
+                            {iconMap[feature.iconName]}
                             </div>
                             <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-300">
                                 {feature.title}
@@ -65,7 +47,7 @@ const WhyChooseUs: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 

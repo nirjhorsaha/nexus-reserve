@@ -5,7 +5,7 @@ import 'aos/dist/aos.css';
 import { GoCodeReview } from "react-icons/go";
 import Section from '@/pages/Shared/Section';
 import '../styles/CustomerReview.css';
-import reviewsData from '.././../data/reviews.json'
+import reviewsData from '../../data/CustomerReviews.json'
 
 const CustomerReview: React.FC = () => {
   useEffect(() => {
