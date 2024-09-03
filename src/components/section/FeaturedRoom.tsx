@@ -17,7 +17,7 @@ const FeaturedRoom = () => {
                     <Section
                         icon={TbBrandFeedly}
                         title="Featured Rooms"
-                        subtitle="Loading..."
+                        subtitle=""
                     />
                     <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {Array.from({ length: 6 }).map((_, index) => (
@@ -59,19 +59,18 @@ const FeaturedRoom = () => {
                     subtitle="Explore our top-rated meeting rooms that offer exceptional comfort and facilities for your next event."
                 />
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {Array.isArray(rooms) ? (
-                        rooms.slice(0, 6).map((room) => (
-                            <RoomCard key={room?._id} room={room} />
-                        ))
+                    {Array.isArray(rooms) ? (
+                        rooms.slice(0, 6).map((room, index) => (
+                            <div key={room?._id} data-aos="fade-up" data-aos-delay={index * 100}>
+                                <RoomCard room={room} />
+                            </div>))
                     ) : (
                         <p>No rooms available.</p>
                     )}
                 </div>
             </div>
-            <div className="mt-8 text-center">
-            
-                    <ButtonLink to="/meeting-room" text="See More" />
-               
+            <div className="mt-8 text-center" data-aos="fade-up" data-aos-delay='600'>
+                <ButtonLink to="/meeting-room" text="See More"/>
             </div>
         </div>
     );
