@@ -18,7 +18,7 @@ const FAQSection = () => {
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <Section
                         title='Frequently asked questions'
-                        subtitle='Find answers to the most common questions we receive. If you have any other inquiries, feel free to contact us.'
+                        subtitle='Find answers to the most common questions we receive.'
                         icon={RiQuestionnaireLine}
                     />
                     <div className="accordion-group" data-accordion="default-accordion">
@@ -27,7 +27,7 @@ const FAQSection = () => {
                                 key={item?.id}
                                 className={`accordion border border-solid border-gray-300 p-4 rounded-xl transition duration-500 ${
                                     openAccordion === item?.id ? 'bg-indigo-50 border-indigo-600' : ''
-                                } mb-4 md:mb-8 lg:p-4`}
+                                } mb-4 lg:p-4`}
                             >
                                 <button
                                     className="accordion-toggle group inline-flex items-center justify-between text-left text-lg font-normal leading-8 text-gray-900 w-full transition duration-500 hover:text-indigo-600"
