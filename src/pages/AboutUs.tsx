@@ -61,7 +61,7 @@ const AboutUs: React.FC = () => {
                     <title>About Us - Nexus Reserve</title>
                 </Helmet>
             </HelmetProvider>
-            <div className="p-8">
+            <div className="container mx-auto p-4">
                 {/* <div className="container mx-auto"> */}
                 <div className="mx-auto">
                     <motion.h1
