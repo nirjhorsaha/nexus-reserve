@@ -39,7 +39,7 @@ const Hero = () => {
       {/* <section
         className="bg-[url('https://pagedone.io/asset/uploads/1691055810.png')] bg-center bg-cover"
       > */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative text-center">
+      <div className="mx-auto max-w-7xl relative text-center">
         <h1
           className="lg:max-w-3xl mx-auto text-center font-bold text-4xl md:text-5xl text-gray-900 mb-5 leading-[50px]">
           Book Your Ideal Meeting Room with Ease.
@@ -50,7 +50,7 @@ const Hero = () => {
         </p>
         <Link
           to="/meeting-room"
-          className="w-full md:w-auto mb-14 inline-flex items-center justify-center py-3 px-7 text-base font-semibold text-center text-white rounded-full bg-blue-600 shadow-xs hover:bg-blue-700 transition-all duration-500">
+          className="mb-14 inline-flex items-center justify-center py-3 px-7 text-base font-semibold text-center text-white rounded-full bg-blue-600 shadow-xs hover:bg-blue-700 transition-all duration-500">
           Book Now
           <RightOutlined className="ml-2 text-white" />
         </Link>

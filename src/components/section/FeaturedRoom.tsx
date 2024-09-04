@@ -12,7 +12,7 @@ const FeaturedRoom = () => {
 
     if (isLoading) {
         return (
-            <div className="bg-white py-12 max-w-7xl mx-auto">
+            <div className="py-12 max-w-7xl mx-auto">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <Section
                         icon={TbBrandFeedly}
@@ -38,7 +38,7 @@ const FeaturedRoom = () => {
 
     if (error) {
         return (
-            <div className="bg-white py-12 max-w-7xl mx-auto">
+            <div className="py-12 max-w-7xl mx-auto">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <Section
                         icon={TbBrandFeedly}
@@ -51,7 +51,7 @@ const FeaturedRoom = () => {
     }
 
     return (
-        <div className="bg-white py-12 max-w-7xl mx-auto">
+        <div className="py-12 max-w-7xl mx-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <Section
                     icon={TbBrandFeedly}
@@ -69,7 +69,7 @@ const FeaturedRoom = () => {
                     )}
                 </div>
             </div>
-            <div className="mt-8 text-center" data-aos="fade-up" data-aos-delay='600'>
+            <div className="mt-8 text-center" data-aos="fade-up" data-aos-delay='500'>
                 <ButtonLink to="/meeting-room" text="See More"/>
             </div>
         </div>

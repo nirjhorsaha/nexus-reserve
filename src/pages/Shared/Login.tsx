@@ -19,14 +19,14 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    useEffect(() => { 
+    useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     const { handleSubmit, control, formState: { errors } } = useForm<LoginFormInputs>({
         defaultValues: {
             email: 'test@programming-hero.com',  //! Default value (for development only)
-            password: 'test-password',           
+            password: 'test-password',
             remember: true,
         },
     });
@@ -42,9 +42,13 @@ const Login: React.FC = () => {
                 password: data.password
             };
             const res = await login(userInfo).unwrap();
+            // console.log({ res })
 
-            const user = verifyToken(res.data.accessToken);
-            dispatch(setUser({ user: user, token: res.data.accessToken }));
+            const { accessToken, ...userDetails } = res.data;
+            const userData = userDetails.user;
+            
+            const user = verifyToken(accessToken);
+            dispatch(setUser({ user: userData, token: res.data.accessToken  }));
 
             // Navigate based on role
             if (user?.role === 'admin') {

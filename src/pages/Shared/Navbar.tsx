@@ -8,7 +8,7 @@ import { Button, Dropdown, MenuProps } from 'antd';
 import { UserOutlined, LogoutOutlined, LoginOutlined } from '@ant-design/icons';
 import { verifyToken } from '@/utils/verifyToken';
 
-interface IUser {
+export interface IUser {
   role: 'user' | 'admin'; // Adjust roles based on your actual roles
   // Add other properties if necessary
 }
@@ -18,27 +18,18 @@ const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(useCurrentToken);
 
-
   const [isUser, setIsUser] = useState<IUser | null>(null);
-  console.log({ isUser })
 
   useEffect(() => {
     if (token) {
       const user = verifyToken(token);
-      console.log('Verified User:', user); // Check if the user object is correct
+      // console.log('Verified User:', user); // Check if the user object is correct
       setIsUser(user);
     } else {
       setIsUser(null);
     }
   }, [token]);
 
-
-  // let isUser;
-  // console.log({isUser});
-
-  // if (token) {
-  //   isUser = verifyToken(token);
-  // }
 
   // Reusable NavLink component
   const CustomNavLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
@@ -64,7 +55,7 @@ const Navbar: React.FC = () => {
         key: 'mybooking',
         label: (
           <NavLink to={isUser?.role === 'user' ? `/${isUser?.role}/my-bookings` : `/${isUser?.role}/dashboard`}
-            className="dropdown-item">
+            className="dropdown-item ">
             <Button type="text" icon={<UserOutlined />}
             >
               {isUser?.role === 'user' ? 'My Booking' : 'Dashboard'}
@@ -102,8 +93,9 @@ const Navbar: React.FC = () => {
       position: 'sticky',
       top: 0,
       zIndex: 1000,
-      backgroundColor: '#fff',
-    }} className="navbar bg-base-100 mb-5">
+
+    }} className="navbar mb-5 bg-gradient-to-r from-blue-50 via-white to-blue-100">
+      {/* }} className="navbar bg-base-100 mb-5"> */}
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button"

@@ -34,8 +34,8 @@ const FooterSection = ({ title, links }: { title: string; links: { to: string; t
 
 
 const Footer = () => (
-    <footer className="bg-gray-200">
-        <div className="max-w-screen-xl px-4 pt-12 pb-6 mx-auto">
+    <footer className="bg-gradient-to-r from-blue-50 via-white to-blue-100">
+        <div className="max-w-7xl px-4 pt-12 pb-6 mx-auto border border-x-0 border-y-2">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                 <div>
                     <div className="flex justify-center text-teal-300 sm:justify-start">
