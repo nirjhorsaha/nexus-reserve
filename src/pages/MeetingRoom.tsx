@@ -17,10 +17,14 @@ const MeetingRoom = () => {
   const [capacityFilter, setCapacityFilter] = useState<number | null>(null);
   const [priceFilter, setPriceFilter] = useState<number | null>(null);
   const [sortOption, setSortOption] = useState<'asc' | 'desc' | null>(null);
+  const [priceRange, setPriceRange] = useState<[number, number] | null>(null);
+  const [capacityRange, setCapacityRange] = useState<[number, number] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 500); // debounce search 
+  console.log(capacityFilter, priceFilter)
+  console.log(capacityRange, priceRange)
+  const debouncedSearchTerm = useDebounce(searchTerm, 400); // debounce search 
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -37,17 +41,16 @@ const MeetingRoom = () => {
     if (capacityFilter) params.capacity = capacityFilter;
     if (priceFilter) params.pricePerSlot = priceFilter;
     if (sortOption) params.sort = sortOption === 'asc' ? 'pricePerSlot' : '-pricePerSlot';
-    params.page = currentPage;
-    params.limit = itemsPerPage;
+    params.limit = Number.MAX_SAFE_INTEGER; // Fetch all results
 
     return params;
-  }, [debouncedSearchTerm, capacityFilter, priceFilter, sortOption, currentPage]);
+  }, [debouncedSearchTerm, capacityFilter, priceFilter, sortOption]);
 
   const { data, error, isLoading } = useGetAllRoomsQuery(buildQueryParams());
 
   const roomdata = data?.data;
-  const rooms = roomdata?.result as TRoom[];
-  const metaData = roomdata?.meta;
+  const rooms = roomdata?.result as TRoom[]; // All rooms fetched
+  // const metaData = roomdata?.meta;
 
   useEffect(() => {
     setCurrentPage(1);  // Reset to the first page when filters change
@@ -58,22 +61,66 @@ const MeetingRoom = () => {
   };
 
   const handleCapacityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedCapacity = e.target.value ? Number(e.target.value) : null;
-    setCapacityFilter(selectedCapacity);
+    const value = Number(e.target.value);
+    if (value === 10) {
+      setCapacityRange([1, 20]);
+    } else if (value === 20) {
+      setCapacityRange([20, 30]);
+    } else if (value === 30) {
+      setCapacityRange([30, 60])
+    } else {
+      setCapacityRange(null);
+    }
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPriceFilter(e.target.value ? Number(e.target.value) : null);
+    const value = Number(e.target.value);
+    if (value === 50) {
+      setPriceRange([10, 50]);
+    } else if (value === 100) {
+      setPriceRange([50, 100]);
+    } else if (value === 200) {
+      setPriceRange([100, 200])
+    } else {
+      setPriceRange(null);
+    }
   };
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOption(e.target.value as 'asc' | 'desc' | null);
   };
 
+ // Filter rooms based on filters
+ const filteredRooms = rooms?.filter(room => {
+  let isMatch = true;
+
+  if (priceRange) {
+    isMatch = room.pricePerSlot >= priceRange[0] && room.pricePerSlot <= priceRange[1];
+  }
+  if (capacityRange) {
+    isMatch = room.capacity >= capacityRange[0] && room.capacity <= capacityRange[1];
+  }
+
+  return isMatch;
+}) ?? [];
+
+// Sort rooms
+const sortedRooms = filteredRooms.sort((a, b) => {
+  if (sortOption === 'asc') return a.pricePerSlot - b.pricePerSlot;
+  if (sortOption === 'desc') return b.pricePerSlot - a.pricePerSlot;
+  return 0;
+});
+
+  // Paginate filtered rooms
+  const paginatedRooms = sortedRooms.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+
   const clearFilters = () => {
     setSearchTerm('');
     setCapacityFilter(null);
     setPriceFilter(null);
+    setPriceRange(null);
+    setCapacityRange(null);
     setSortOption(null);
     setCurrentPage(1); // Reset to the first page
   };
@@ -101,13 +148,13 @@ const MeetingRoom = () => {
             onChange={handleSearchChange}
             className="border py-3 px-3 rounded mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4"
           />
-          <select onChange={handleCapacityChange} value={capacityFilter ?? ''} className="border p-2 rounded mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4">
+          <select onChange={handleCapacityChange} value={capacityRange ? capacityRange[1].toString(): ''} className="border p-2 rounded mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4">
             <option value="">Capacity</option>
-            <option value="10">20+</option>
-            <option value="20">35+</option>
-            <option value="30">50+</option>
+            <option value="10">10+</option>
+            <option value="20">20+</option>
+            <option value="30">30+</option>
           </select>
-          <select onChange={handlePriceChange} value={priceFilter ?? ''} className="border p-2 rounded mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4">
+          <select onChange={handlePriceChange} value={priceRange ? priceRange[1].toString() : ''} className="border p-2 rounded mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4">
             <option value="">Price</option>
             <option value="50">Up to $50</option>
             <option value="100">Up to $100</option>
@@ -140,9 +187,9 @@ const MeetingRoom = () => {
           <div className="flex justify-center items-center h-[60vh]">
             <GridLoader color="#2563eb" />
           </div>
-        ) : rooms && rooms.length > 0 ? (
+        ) : paginatedRooms && paginatedRooms.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {rooms?.map(room => (
+            {paginatedRooms?.map(room => (
               <RoomCard key={room?._id} room={room} />
             ))}
           </div>
@@ -154,7 +201,7 @@ const MeetingRoom = () => {
           <Pagination
             current={currentPage}
             pageSize={itemsPerPage}
-            total={metaData?.total || 0}
+            total={filteredRooms.length} // Use length of filteredRooms for pagination
             onChange={(page) => setCurrentPage(page)}
             showSizeChanger={false}
             className="ant-pagination"
