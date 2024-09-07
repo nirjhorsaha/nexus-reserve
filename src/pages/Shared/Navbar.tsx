@@ -43,9 +43,9 @@ const Navbar: React.FC = () => {
     </NavLink>
   );
 
+  // Handle logout and navigate to the login page
   const handleLogout = () => {
     dispatch(logout());
-    // Navigate to the login page
     navigate('/login');
   };
 
@@ -94,28 +94,35 @@ const Navbar: React.FC = () => {
       top: 0,
       zIndex: 1000,
 
-    }} className="navbar mb-5 bg-gradient-to-r from-blue-50 via-white to-blue-100">
+    }} className="navbar bg-gradient-to-r from-blue-50 via-white to-blue-100">
       {/* }} className="navbar bg-base-100 mb-5"> */}
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button"
-            className="btn btn-ghost lg:hidden"
-            aria-label="Toggle navigation" aria-haspopup="true" aria-expanded="false">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          {!isUser || isUser.role !== 'admin' ? (
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost lg:hidden"
+              aria-label="Toggle navigation"
+              aria-haspopup="true"
+              aria-expanded="false"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+          ) : null}
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[2] mt-3 w-52 p-2 shadow"
@@ -134,12 +141,16 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li><CustomNavLink to="/">Home</CustomNavLink></li>
-          <li><CustomNavLink to="/meeting-room">Meeting Rooms</CustomNavLink></li>
-          <li><CustomNavLink to="/about">About Us</CustomNavLink></li>
-          <li><CustomNavLink to="/contact">Contact Us</CustomNavLink></li>
-        </ul>
+        {isUser && isUser.role === 'admin'
+          ? <h2 className='text-3xl mb-0'>Admin Dashboard</h2> :
+          <ul className="menu menu-horizontal px-1">
+            <li><CustomNavLink to="/">Home</CustomNavLink></li>
+            <li><CustomNavLink to="/meeting-room">Meeting Rooms</CustomNavLink></li>
+            <li><CustomNavLink to="/about">About Us</CustomNavLink></li>
+            <li><CustomNavLink to="/contact">Contact Us</CustomNavLink></li>
+          </ul>
+        }
+
       </div>
       <div className="navbar-end">
         <Dropdown menu={{ items }} trigger={['hover']} placement="bottomRight">

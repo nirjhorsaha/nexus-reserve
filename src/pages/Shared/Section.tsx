@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { IconType } from 'react-icons';
+import 'aos/dist/aos.css'; // Import AOS styles
 
 interface SectionProps {
   icon: IconType;
@@ -9,7 +10,12 @@ interface SectionProps {
 
 const Section: FC<SectionProps> = ({ icon: Icon, title, subtitle }) => {
   return (
-    <div className="text-left mb-6">
+    <div
+      className="text-left mb-6"
+      data-aos="fade-up" // Animation type
+      data-aos-duration="500" // Duration of the animation
+      data-aos-easing="ease-out" // Easing function
+    >
       <div className='flex items-center mb-1'>
         <div className="hidden sm:block">
           <Icon className="text-blue-600 mr-2 text-3xl" />

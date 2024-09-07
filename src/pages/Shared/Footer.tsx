@@ -73,14 +73,14 @@ const Footer = () => (
                         title="Our Services"
                         links={[
                             { to: "/meeting-room", text: "Rooms" },
-                            { to: "/dashboard", text: "Dashboard" },
+                            { to: "/", text: "Terms Of Services" },
                         ]}
                     />
                     <FooterSection
                         title="Helpful Links"
                         links={[
                             { to: "/", text: "FAQs" },
-                            { to: "/", text: "Support" },
+                            { to: "/", text: "Privacy Policy" },
                         ]}
                     />
                     <div className="text-center sm:text-left">
