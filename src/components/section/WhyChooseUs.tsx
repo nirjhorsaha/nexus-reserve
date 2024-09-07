@@ -21,8 +21,7 @@ const WhyChooseUs: React.FC = () => {
     }, []);
 
     return (
-        <div className="py-12 max-w-7xl mx-auto">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="py-12 max-w-7xl mx-auto px-8 md:px-0">
                 <Section
                     icon={MdOutlineQuestionAnswer}
                     title="Why Choose Us?"
@@ -47,7 +46,6 @@ const WhyChooseUs: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </div>
     );
 };
 

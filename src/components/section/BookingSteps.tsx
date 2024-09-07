@@ -32,10 +32,9 @@ const BookingSteps: React.FC = () => {
     const stepTitleStyle = { fontFamily: 'Nunito' };
 
     return (
-        <section className="py-12  max-w-7xl mx-auto">
-            <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <section className="py-12  max-w-7xl mx-auto px-8 md:px-0">
                 <div className="text-center mb-6">
-                    <h2 className="text-4xl font-semibold text-blue-600 mb-1 tracking-wide">How does it work?</h2>
+                    <h2 className="text-4xl font-semibold text-blue-600 mb-1 tracking-wide">How to Book in 3 Simple Steps?</h2>
                     <div className="flex items-center">
                         <h3 className="text-lg mx-auto font-medium text-gray-600">Follow these simple steps to book your room with ease.</h3>
                     </div>
@@ -88,7 +87,6 @@ const BookingSteps: React.FC = () => {
                         ))}
                     </div>
                 </div>
-            </div>
         </section>
     );
 };

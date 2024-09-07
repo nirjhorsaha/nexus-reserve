@@ -39,7 +39,7 @@ const Hero = () => {
       {/* <section
         className="bg-[url('https://pagedone.io/asset/uploads/1691055810.png')] bg-center bg-cover"
       > */}
-      <div className="mx-auto max-w-7xl relative text-center">
+      <div className="mx-auto max-w-7xl relative text-center px-8 md:px-0">
         <h1
           className="lg:max-w-3xl mx-auto text-center font-bold text-4xl md:text-5xl text-gray-900 mb-5 leading-[50px]">
           Book Your Ideal Meeting Room with Ease.
