@@ -1,35 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// import { TRoom } from "@/types/room";
 import { baseApi } from "../../api/baseApi";
-import { TResponseRedux } from "@/types";
+import { TResponseRedux, TRoom } from "@/types";
 
 const roomApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllRooms: builder.query({
-            query: (args) => {
-                // console.log(args);
-                // const params = new URLSearchParams();
-
-                const queryString = args
-                    ? new URLSearchParams(args).toString()
+            query: (params) => {
+                const queryString = params
+                    ? new URLSearchParams(params).toString()
                     : "";
 
-                const url = queryString
-                    ? `/rooms?${queryString}`
-                    : "/rooms";
+                const url = queryString ? `/rooms?${queryString}` : "/rooms";
                 console.log("Fetching URL:", url); // For debugging
+
                 return {
-                    url: `/rooms/${queryString}`,
+                    url: `/rooms?${queryString}`,
                     method: "GET",
                 };
             },
-            providesTags: ["rooms"],
             transformResponse: (response: TResponseRedux<any>) => {
                 return {
                     data: response.data,
                     meta: response.meta,
                 };
             },
+            providesTags: ["rooms"],
         }),
         getSingleRoom: builder.query({
             query: (id: string) => ({
@@ -37,11 +32,37 @@ const roomApi = baseApi.injectEndpoints({
                 method: "GET",
             }),
             providesTags: ["rooms"],
-            // transformResponse: (response: TResponseRedux<TRoom>) => {
-            //     return response.data;
-            // },
+        }),
+        createRoom: builder.mutation<TRoom, TRoom>({
+            query: (room) => ({
+                url: `/rooms`,
+                method: "POST",
+                body: room,
+            }),
+            invalidatesTags: ["rooms"],
+        }),
+        updateRoom: builder.mutation({
+            query: ({ id, room }) => ({
+                url: `rooms/${id}`,
+                method: "PATCH",
+                body: room,
+            }),
+            invalidatesTags: ["rooms"],
+        }),
+        deleteRoom: builder.mutation({
+            query: (id) => ({
+                url: `rooms/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["rooms"],
         }),
     }),
 });
 
-export const { useGetAllRoomsQuery, useGetSingleRoomQuery } = roomApi;
+export const {
+    useGetAllRoomsQuery,
+    useGetSingleRoomQuery,
+    useUpdateRoomMutation,
+    useDeleteRoomMutation,
+    useCreateRoomMutation,
+} = roomApi;
