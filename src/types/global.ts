@@ -1,12 +1,18 @@
 import { BaseQueryApi } from "@reduxjs/toolkit/query";
 
+export type ErrorSource = {
+    message: string;  // Description of the error
+    code?: string;    // Optional error code
+    details?: string; // Optional additional details
+};
+
+// Defines the structure for error responses including multiple error sources
 export type TError = {
-    data: {
-        message: string;
-        stack: string;
-        success: boolean;
+    data?: {
+        errorSources?: ErrorSource[];  // Array of error sources
+        success?: boolean;  // Optional success flag
     };
-    status: number;
+    status: number;  // HTTP status code
 };
 
 export type TMeta = {
