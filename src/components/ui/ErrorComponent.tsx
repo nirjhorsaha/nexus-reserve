@@ -7,7 +7,7 @@ interface ErrorComponentProps {
 
 const ErrorComponent: React.FC<ErrorComponentProps> = ({ message }) => {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen font-Nunito">
       <div className="text-center space-y-4">
         <div className="flex justify-center">
           <FaExclamationTriangle className="text-red-600 text-6xl" />
