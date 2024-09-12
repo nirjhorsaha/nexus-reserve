@@ -1,33 +1,32 @@
-import AdminDashboard from "@/pages/admin/AdminDashboard";
+import { HomeOutlined, ClockCircleOutlined, ProductOutlined, UserOutlined } from '@ant-design/icons';
 import BookingManagement from "@/pages/admin/BookingManagement";
+import Dashboard from "@/pages/admin/Dashboard";
 import RoomManagement from "@/pages/admin/RoomManagement";
 import SlotManagement from "@/pages/admin/SlotManagement";
-
 
 export const adminPaths = [
     {
         name: 'Dashboard',
         path: 'dashboard',
-        element: <AdminDashboard />,
+        element: <Dashboard />,
+        icon: <ProductOutlined />,
     },
     {
-        name: 'Mangement',
-        children: [
-            {
-                name: 'Booking Management',
-                path: 'booking-management',
-                element: <BookingManagement/>
-            },
-            {
-                name: 'Room Management',
-                path: 'room-management',
-                element: <RoomManagement />
-            },
-            {
-                name: 'Slot Management',
-                path: 'slot-management',
-                element: <SlotManagement />
-            }
-        ]
-    }
-]
+        name: 'Booking Management',
+        path: 'booking-management',
+        element: <BookingManagement />,
+        icon: <UserOutlined />,
+    },
+    {
+        name: 'Room Management',
+        path: 'room-management',
+        element: <RoomManagement />,
+        icon: <HomeOutlined />,
+    },
+    {
+        name: 'Slot Management',
+        path: 'slot-management',
+        element: <SlotManagement />,
+        icon: <ClockCircleOutlined />,
+    },
+];

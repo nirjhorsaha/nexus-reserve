@@ -13,7 +13,7 @@ export const userPaths = [
     element: <RoomDeatils />
   },
   {
-    path: 'bookings',
+    path: 'bookings/:id',
     element: <Bookings />
   },
   {
