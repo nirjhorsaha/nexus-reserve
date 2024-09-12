@@ -2,7 +2,6 @@ import { ReactNode, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
     logout,
-    //   selectCurrentUser,
     useCurrentToken,
 } from '../../redux/features/auth/authSlice';
 import { Navigate } from 'react-router-dom';
@@ -43,6 +42,7 @@ const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
         // console.log('Token:', token);
         // console.log('User:', user);
         // console.log('Required Role:', role);
+
         if (loading) return; // Wait until verification is complete
 
         if (role !== undefined && role !== user?.role) {
