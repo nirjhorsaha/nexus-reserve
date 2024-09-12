@@ -7,13 +7,13 @@ import RoomCard from "../card/RoomCard";
 import ButtonLink from "../ui/buttonLink";
 
 const FeaturedRoom = () => {
-    const { data, error, isLoading } = useGetAllRoomsQuery({});
+    const { data, isError, isLoading } = useGetAllRoomsQuery({});
     const rooms = data?.data?.result as TRoom[];
 
     if (isLoading) {
         return (
             <div className="py-12 max-w-7xl mx-auto">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto">
                     <Section
                         icon={TbBrandFeedly}
                         title="Featured Rooms"
@@ -36,10 +36,10 @@ const FeaturedRoom = () => {
         );
     }
 
-    if (error) {
+    if (isError) {
         return (
             <div className="py-12 max-w-7xl mx-auto">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto ">
                     <Section
                         icon={TbBrandFeedly}
                         title="Featured Rooms"
@@ -51,7 +51,7 @@ const FeaturedRoom = () => {
     }
 
     return (
-        <div className="max-w-7xl py-12 mx-auto px-8 md:px-0">
+        <div className="max-w-7xl py-12 mx-auto">
             <div className=" ">
                 <Section
                     icon={TbBrandFeedly}
