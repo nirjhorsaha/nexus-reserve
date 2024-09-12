@@ -1,6 +1,6 @@
 /* Styling for carousel slide indicators */
 .ant-carousel .slick-dots {
-    bottom: 10px; /* Position from the bottom */
+    bottom: 20px; /* Position from the bottom */
 }
 
 .ant-carousel .slick-dots li {
