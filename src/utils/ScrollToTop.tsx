@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaArrowUp } from 'react-icons/fa'; // You can use any icon library or custom icon
+import { FaArrowUp } from 'react-icons/fa';
 
 const ScrollToTopButton: React.FC = () => {
     const [showButton, setShowButton] = useState(false);
@@ -21,7 +21,7 @@ const ScrollToTopButton: React.FC = () => {
     }, []);
 
     const scrollToTop = () => {
-        // console.log('Scroll to Top Button Clicked'); // Debugging
+        // console.log('Scroll to Top Button Clicked');
         window.scrollTo({
             top: 0,
             behavior: 'smooth',

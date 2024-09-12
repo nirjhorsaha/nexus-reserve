@@ -1,9 +1,9 @@
-import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 interface CustomJwtPayload extends JwtPayload {
-  role: string;
+    role: 'user' | 'admin';
 }
 
 export const verifyToken = (token: string): CustomJwtPayload => {
-  return jwtDecode(token);
+    return jwtDecode<CustomJwtPayload>(token);
 };
