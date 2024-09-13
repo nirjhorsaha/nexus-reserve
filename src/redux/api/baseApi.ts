@@ -11,7 +11,8 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api",
+    // baseUrl: import.meta.env.VITE_SERVER_URL,
+    baseUrl: "https://nexus-reserve-server.vercel.app/api",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
@@ -54,7 +55,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
             console.log("Sending refresh token");
 
             const res = await fetch(
-                "http://localhost:5000/api/auth/refresh-token",
+                "https://nexus-reserve-server.vercel.app/api/auth/refresh-token",
                 {
                     method: "POST",
                     credentials: "include",
