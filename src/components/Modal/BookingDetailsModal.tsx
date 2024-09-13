@@ -30,11 +30,11 @@ const UpdateBookingModal: React.FC<UpdateBookingModalProps> = ({ visible, onClos
                         <h3 className="text-2xl font-bold text-gray-800 mb-4">Booking Details</h3>
 
                         <section className="border-t border-gray-200 pt-4">
-                            <h4 className="text-xl font-semibold text-gray-700 mb-2">Room Information</h4>
+                            <h4 className=" text-gray-700 mb-2 text-xl"><span className=" font-semibold">Room: </span>{booking.room.name}</h4>
                             <div className="">
                                 <div className="flex flex-wrap gap-2 text-center ">
-                                    <p className="bg-gray-100 text-gray-700 py-1 px-3 rounded-xl text-base font-medium flex-1 mr-4"><strong className="font-medium">Room Number:</strong> <span>{booking.room.roomNo}</span></p>
-                                    <p className="bg-gray-100 text-gray-700 py-1 px-3 rounded-xl text-base font-medium flex-1 mr-4"><strong className="font-medium">Floor Number:</strong> <span>{booking.room.floorNo}</span></p>
+                                    <p className="bg-gray-100 text-gray-700 py-1 px-3 rounded-xl text-base font-medium flex-1 mr-4"><strong className="font-medium">Room No:</strong> <span>{booking.room.roomNo}</span></p>
+                                    <p className="bg-gray-100 text-gray-700 py-1 px-3 rounded-xl text-base font-medium flex-1 mr-4"><strong className="font-medium">Floor No:</strong> <span>{booking.room.floorNo}</span></p>
                                     <p className="bg-gray-100 text-gray-700 py-1 px-3 rounded-xl text-base font-medium flex-1 mr-4"><strong className="font-medium">Capacity:</strong> <span>{booking.room.capacity}</span></p>
                                     <p className="bg-gray-100 text-gray-700 py-1 px-3 rounded-xl text-base font-medium flex-1 mr-4"><strong className="font-medium">Price Per Slot:</strong> <span>${booking.room.pricePerSlot}</span></p>
                                 </div>
@@ -49,8 +49,9 @@ const UpdateBookingModal: React.FC<UpdateBookingModalProps> = ({ visible, onClos
                                         </span>
                                     ))}
                                 </div>
-                                <p className="text-lg mt-4"><strong className="font-semibold">Total Amount:</strong> ${booking.totalAmount}</p>
-                                <p className="text-lg mt-4"><strong className="font-semibold">Room Images:</strong></p>
+                                <p className="text-lg mt-4"><strong className="font-semibold">Total Amount: </strong> ${booking.totalAmount}</p>
+                                <p className="text-lg mt-4"><strong className="font-semibold">TransactionID: </strong>{booking.transactionID}</p>
+                                <p className="text-lg mt-4"><strong className="font-semibold">Room Images: </strong></p>
                                 <div className="flex flex-wrap gap-4">
                                     {booking.room.images.map((image, index) => (
                                         <img
@@ -68,9 +69,9 @@ const UpdateBookingModal: React.FC<UpdateBookingModalProps> = ({ visible, onClos
                             <section className="flex-1 border-t border-gray-200 pt-4">
                                 <h4 className="text-xl font-semibold text-gray-700 mb-2">User Information</h4>
                                 <div className="space-y-2">
-                                    <p className="text-lg m-0"><strong className="font-medium">User Name:</strong> <span>{booking.user.name}</span></p>
-                                    <p className="text-lg"><strong className="font-medium">User Email:</strong> <span>{booking.user.email}</span></p>
-                                    <p className="text-lg"><strong className="font-medium">User Phone:</strong> <span>{booking.user.phone}</span></p>
+                                    <p className="text-base m-0"><strong className="font-bold">User Name:</strong> <span>{booking.user.name}</span></p>
+                                    <p className="text-base"><strong className="font-bold">User Email:</strong> <span>{booking.user.email}</span></p>
+                                    <p className="text-base"><strong className="font-bold">User Phone:</strong> <span>{booking.user.phone}</span></p>
                                 </div>
                             </section>
 
