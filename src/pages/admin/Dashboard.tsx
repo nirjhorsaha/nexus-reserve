@@ -6,22 +6,23 @@ import { useGetAllSlotsQuery } from '@/redux/features/slot/slotApi';
 import { useGetAllBookingsQuery } from '@/redux/features/booking/bookingApi';
 import Loading from '@/components/ui/loading';
 import ErrorComponent from '@/components/ui/ErrorComponent';
+import { Helmet, HelmetProvider } from "react-helmet-async";
+
 
 const { Meta } = Card;
 
 const Dashboard = () => {
-  const { data: roomData, error, isLoading } = useGetAllRoomsQuery({});
+  const { data: roomData, isError, isLoading } = useGetAllRoomsQuery({});
   const { data: slotData } = useGetAllSlotsQuery({});
   const { data: bookingsData } = useGetAllBookingsQuery({});
 
   if (isLoading) return <Loading />;
-  if (error) return <ErrorComponent message='Somthing went wrong' />;
+  if (isError) return <ErrorComponent message='Something went wrong! Please try again later.' />;
 
   // Get the total number of rooms
   const totalRooms = roomData?.data?.meta.total || 0;
-  const totalSlots = slotData?.data?.length || 0
-  const totalBookings = bookingsData?.data?.length || 0
-
+  const totalSlots = slotData?.data?.length || 0;
+  const totalBookings = bookingsData?.data?.length || 0;
 
   const recentBookings = [
     { room: 'Room A123', date: '2024-09-15', status: 'Confirmed' },
@@ -30,99 +31,106 @@ const Dashboard = () => {
   ];
 
   const titleStyle = {
-    fontSize: '22px',
+    fontSize: '1.25rem', // Tailwind's text-xl
     fontWeight: 'bold',
     fontFamily: "Nunito"
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        {/* Key Metrics */}
-        <Card className="shadow-md" title={<span style={titleStyle}>Total Rooms</span>} bordered={false}>
-          <Statistic
-            value={totalRooms}
-            prefix={<HomeOutlined />}
-            valueStyle={{ color: '#3f8600' }}
-          />
-        </Card>
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>Dashboard - Nexus Reserve</title>
+        </Helmet>
+      </HelmetProvider>
+      <div className="p-1 md:p-6 ">
+        {/* Statistics Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          <Card className="shadow-md" title={<span style={titleStyle}>Total Rooms</span>} bordered={false}>
+            <Statistic
+              value={totalRooms}
+              prefix={<HomeOutlined />}
+              valueStyle={{ color: '#3f8600' }}
+            />
+          </Card>
 
-        <Card className="shadow-md" title={<span style={titleStyle}>Total Bookings</span>} bordered={false}>
-          <Statistic
-            value={totalBookings}
-            prefix={<CalendarOutlined />}
-            valueStyle={{ color: '#cf1322' }}
-          />
-        </Card>
+          <Card className="shadow-md" title={<span style={titleStyle}>Total Bookings</span>} bordered={false}>
+            <Statistic
+              value={totalBookings}
+              prefix={<CalendarOutlined />}
+              valueStyle={{ color: '#cf1322' }}
+            />
+          </Card>
 
-        <Card className="shadow-md" title={<span style={titleStyle}>Total Slots</span>} bordered={false}>
-          <Statistic
-            value={totalSlots}
-            prefix={<ScheduleOutlined />}
-            valueStyle={{ color: '#1890ff' }}
-          />
-        </Card>
+          <Card className="shadow-md" title={<span style={titleStyle}>Total Slots</span>} bordered={false}>
+            <Statistic
+              value={totalSlots}
+              prefix={<ScheduleOutlined />}
+              valueStyle={{ color: '#1890ff' }}
+            />
+          </Card>
+        </div>
 
-
-      </div>
-
-      <Divider orientation="left">Recent Activities</Divider>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
         {/* Recent Activities */}
-        <Card className="shadow-md">
-          <Meta
-            title="New Room Added"
-            description="A new conference room was added to the system."
-          />
-          <Button type="link" className="mt-4" size="small">
-            View Details
-          </Button>
-        </Card>
+        <Divider orientation="left">Recent Activities</Divider>
 
-        <Card className="shadow-md">
-          <Meta
-            title="Booking Confirmed"
-            description="A booking was confirmed for Room A123."
-          />
-          <Button type="link" className="mt-4" size="small">
-            View Details
-          </Button>
-        </Card>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          {/* Example recent activities */}
+          <Card className="shadow-md">
+            <Meta
+              title="New Room Added"
+              description="A new conference room was added to the system."
+            />
+            <Button type="link" className="mt-4" size="small">
+              View Details
+            </Button>
+          </Card>
 
-        <Card className="shadow-md">
-          <Meta
-            title="Slot Updated"
-            description="The slot availability for Room B456 has been updated."
+          <Card className="shadow-md">
+            <Meta
+              title="Booking Confirmed"
+              description="A booking was confirmed for Room A123."
+            />
+            <Button type="link" className="mt-4" size="small">
+              View Details
+            </Button>
+          </Card>
+
+          <Card className="shadow-md">
+            <Meta
+              title="Slot Updated"
+              description="The slot availability for Room B456 has been updated."
+            />
+            <Button type="link" className="mt-4" size="small">
+              View Details
+            </Button>
+          </Card>
+        </div>
+
+        {/* Recent Bookings */}
+        <Divider orientation="left">Recent Bookings</Divider>
+
+        <div className="bg-white p-4 rounded-lg shadow-md">
+          <List
+            size="small"
+            header={<div className="text-lg font-semibold">Recent Bookings</div>}
+            bordered
+            dataSource={recentBookings}
+            renderItem={item => (
+              <List.Item
+                actions={[<Button type="link" key="view">View</Button>]}
+              >
+                <List.Item.Meta
+                  title={`Room: ${item.room}`}
+                  description={`Date: ${item.date} - Status: ${item.status}`}
+                  avatar={<ApartmentOutlined style={{ fontSize: '20px', color: '#1890ff' }} />}
+                />
+              </List.Item>
+            )}
           />
-          <Button type="link" className="mt-4" size="small">
-            View Details
-          </Button>
-        </Card>
+        </div>
       </div>
-
-      <Divider orientation="left">Recent Bookings</Divider>
-
-      <div className="bg-white p-4 rounded-lg shadow-md">
-        <List
-          size="small"
-          header={<div className="text-lg font-semibold">Recent Bookings</div>}
-          bordered
-          dataSource={recentBookings}
-          renderItem={item => (
-            <List.Item
-              actions={[<Button type="link" key="view">View</Button>]}
-            >
-              <List.Item.Meta
-                title={`Room: ${item.room}`}
-                description={`Date: ${item.date} - Status: ${item.status}`}
-                avatar={<ApartmentOutlined style={{ fontSize: '20px', color: '#1890ff' }} />}
-              />
-            </List.Item>
-          )}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 

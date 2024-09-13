@@ -1,103 +1,120 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState } from 'react';
+// import ErrorComponent from "@/components/ui/ErrorComponent";
 import Loading from "@/components/ui/loading";
-import { useGetAllSlotsQuery } from "@/redux/features/slot/slotApi";
-import { TSlot } from "@/types/slot";
-import { DeleteOutlined, EyeOutlined, PlusOutlined } from "@ant-design/icons";
-import { Table, Button, Space } from 'antd';
+import { useGetAllSlotsQuery, useDeleteSlotMutation } from "@/redux/features/slot/slotApi";
+import toast from 'react-hot-toast';
+import { TError, TSlot } from '@/types';
+import DeleteModal from '@/components/Modal/DeleteModal';
+import AddSlotModal from '@/components/Modal/AddSlotModal';
+import UpdateSlotModal from '@/components/Modal/UpdateSlotModal';
+import { useGetAllRoomsQuery } from '@/redux/features/room/roomApi';
+import { Button } from 'antd';
+import SlotTable from '@/components/table/SlotTable';
+import { PlusOutlined } from '@ant-design/icons';
+import { Helmet, HelmetProvider } from "react-helmet-async";
+
 
 const SlotManagement: React.FC = () => {
-  const { data, isLoading, isError } = useGetAllSlotsQuery({});
+  const { data, isLoading } = useGetAllSlotsQuery({});
+  const [deleteSlot, { isLoading: isDeleting }] = useDeleteSlotMutation();
+  const { data: roomsData } = useGetAllRoomsQuery({});
+  console.log(roomsData);
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [slotToDelete, setSlotToDelete] = useState<string | null>(null);
+  const [addSlotModalVisible, setAddSlotModalVisible] = useState(false);
+  const [updateSlotModalVisible, setUpdateSlotModalVisible] = useState(false);
+  const [slotToUpdate, setSlotToUpdate] = useState<TSlot | null>(null);
+
 
   const handleAddSlot = () => {
-    // Logic for adding a slot
+    setAddSlotModalVisible(true);
   };
 
   const handleUpdate = (slot: TSlot) => {
-    console.log(slot);
+    setSlotToUpdate(slot);
+    setUpdateSlotModalVisible(true);
   };
 
   const handleDelete = (slotId: string) => {
-    // Logic for deleting a slot
-    console.log(`Delete slot with ID: ${slotId}`);
+    setSlotToDelete(slotId);
+    setModalVisible(true);
+  };
+
+  const confirmDelete = async () => {
+    if (slotToDelete) {
+      try {
+        await deleteSlot(slotToDelete).unwrap();
+        toast.success('Slot deleted successfully');
+      } catch (err) {
+        const error = err as TError;
+        const errorMessage = error.data?.errorSources?.[0]?.message || 'There was an error deleting the slot.';
+        toast.error(errorMessage);
+      }
+      setModalVisible(false);
+      setSlotToDelete(null);
+    }
+  };
+
+  const cancelDelete = () => {
+    setModalVisible(false);
+    setSlotToDelete(null);
   };
 
   if (isLoading) return <Loading />;
-  if (isError) return <div>Error fetching slots. Please try again later.</div>;
-
-  const columns = [
-    {
-      title: 'Room Name',
-      dataIndex: ['room', 'name'], // Accessing nested 'room' object
-      key: 'roomName',
-    },
-    {
-      title: 'Room No.',
-      dataIndex: ['room', 'roomNo'], // Accessing nested 'room' object
-      key: 'roomNo',
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
-    },
-    {
-      title: 'Start Time',
-      dataIndex: 'startTime',
-      key: 'startTime',
-    },
-    {
-      title: 'End Time',
-      dataIndex: 'endTime',
-      key: 'endTime',
-    },
-    {
-      title: 'Actions',
-      key: 'actions',
-      render: (_: any, record: TSlot) => (
-        <Space size="middle">
-          <Button
-            shape="round"
-            icon={<EyeOutlined />}
-            onClick={() => handleUpdate(record)}
-            className="text-cyan-600"
-            aria-label="Update slot"
-          >
-            Update
-          </Button>
-          <Button
-            shape="round"
-            icon={<DeleteOutlined />}
-            onClick={() => handleDelete(record._id as string)}
-            className="text-red-600"
-            aria-label="Delete slot"
-          >
-            Delete
-          </Button>
-        </Space>
-      ),
-    },
-  ];
+  // if (isError) return <ErrorComponent message="Error fetching slots! Please try again later." />;
 
   return (
-    <div className="p-6 font-Nunito">
-      <div className="flex justify-between mb-4">
-        <h2 className="text-xl font-bold">Slot Management</h2>
-        <Button
-          shape="round"
-          icon={<PlusOutlined />}
-          onClick={handleAddSlot}
-          type="primary"
-          aria-label="Add new slot"
-        >
-          Add Slot
-        </Button>
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>Slot Management - Nexus Reserve</title>
+        </Helmet>
+      </HelmetProvider>
+      <div className="p-1 md:p-6 font-Nunito">
+        <div className="flex flex-col md:flex-row md:justify-between mb-4">
+          <h2 className="text-xl font-bold">Slot Management</h2>
+          <Button
+            shape="default"
+            icon={<PlusOutlined />}
+            onClick={handleAddSlot}
+            type="primary"
+            aria-label="Add new slot"
+            style={{ fontFamily: 'Nunito' }}
+
+          >
+            Add Slot
+          </Button>
+        </div>
+
+        <SlotTable
+          data={data?.data || []}
+          onUpdate={handleUpdate}
+          onDelete={handleDelete}
+          isDeleting={isDeleting}
+        />
+
+        <AddSlotModal
+          visible={addSlotModalVisible}
+          onClose={() => setAddSlotModalVisible(false)}
+          rooms={roomsData?.data?.result || []}
+        />
+
+        <DeleteModal
+          visible={modalVisible}
+          onConfirm={confirmDelete}
+          onCancel={cancelDelete}
+          description="Are you sure you want to delete the slot?"
+        />
+
+        <UpdateSlotModal
+          visible={updateSlotModalVisible}
+          onClose={() => setUpdateSlotModalVisible(false)}
+          slot={slotToUpdate}
+          rooms={roomsData?.data?.result || []}
+        />
       </div>
-      <Table
-        columns={columns}
-        dataSource={data?.data}
-        rowKey="_id"
-      />
-    </div>
+    </>
   );
 };
 
