@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useMemo, useState } from 'react';
 import { Form, Input, InputNumber, Select, Row, Col, Divider } from 'antd';
 import { TRoom } from '@/types';
@@ -46,11 +47,11 @@ const RoomForm: React.FC<RoomFormProps> = ({ form, room }) => {
         }
     };
 
-    const handleRemoveAmenity = (removedAmenity: string) => {
-        const updatedAmenities = amenities.filter(amenity => amenity !== removedAmenity);
-        setAmenities(updatedAmenities);
-        form.setFieldsValue({ amenities: updatedAmenities });
-    };
+    // const handleRemoveAmenity = (removedAmenity: string) => {
+    //     const updatedAmenities = amenities.filter(amenity => amenity !== removedAmenity);
+    //     setAmenities(updatedAmenities);
+    //     form.setFieldsValue({ amenities: updatedAmenities });
+    // };
 
     return (
         <Form form={form} layout="vertical" initialValues={{ ...room }}>

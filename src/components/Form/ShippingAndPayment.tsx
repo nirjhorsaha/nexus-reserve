@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import ButtonLink from '../ui/buttonLink';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { useCreateBookingMutation } from '@/redux/features/booking/bookingApi';
 import toast from 'react-hot-toast';
 import { FaSpinner } from 'react-icons/fa';
+import { clearBookingDetails } from '@/redux/features/booking/bookingSlice';
+// import { useUpdateSlotsMutation } from '@/redux/features/slot/slotApi';
 
 
 interface ShippingAndPaymentProps {
@@ -23,8 +25,12 @@ const ShippingAndPayment: React.FC<ShippingAndPaymentProps> = ({ formData, handl
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const bookingData = useSelector((state: RootState) => state.booking);
+  const dispatch = useDispatch();
+
   const { room, date, user, totalAmount, slot } = bookingData;
   const [createBooking] = useCreateBookingMutation();
+  // const [updateSlots] = useUpdateSlotsMutation(); 
+
   const [loading, setLoading] = useState<boolean>(false);
 
   const slotIds = slot.map((slotItem) => slotItem?._id);
@@ -63,8 +69,16 @@ const ShippingAndPayment: React.FC<ShippingAndPaymentProps> = ({ formData, handl
         const userBooking = await createBooking(bookingDetails).unwrap();
         toast.success('Room Booked successfully.!')
         if (userBooking.success) {
+          console.log(userBooking?.data?.payment_url)
           console.log(userBooking)
+          // Update the isBooked status of each slot to true
+          // await Promise.all(
+          //   slotIds.map(async (slotId) => {
+          //     await updateSlots({ id: slotId, isBooked: true }).unwrap();
+          //   })
+          // );
           window.location.href = userBooking?.data?.payment_url // redirect to payment page
+          dispatch(clearBookingDetails()) // Reset the booking state
         }
         console.log("Booking successful! Redirecting to payment...");
       } catch (error) {
@@ -81,7 +95,7 @@ const ShippingAndPayment: React.FC<ShippingAndPaymentProps> = ({ formData, handl
 
 
   return (
-    <section className="bg-white p-6 rounded-lg shadow-md">
+    <section className=" p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">Shipping Address & Payment Information</h2>
       {/* Personal Information */}
       <div className="mb-6">
@@ -189,6 +203,7 @@ const ShippingAndPayment: React.FC<ShippingAndPaymentProps> = ({ formData, handl
       <div className="flex justify-center mt-4">
         <ButtonLink
           text={loading ? <><FaSpinner className="animate-spin mr-2" />Processing...</> : "Proceed to Payment"}
+          className='flex items-center justify-center'
           onClick={handleButtonClick}
           disabled={loading} // Disable the button when loading
         />
