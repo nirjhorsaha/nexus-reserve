@@ -1,24 +1,33 @@
 import CustomerReview from "@/components/section/CustomerReview";
 import Hero from "@/components/section/Hero";
 import Service from "@/components/section/Service";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import WhyChooseUs from "@/components/section/WhyChooseUs";
 import BookingSteps from "@/components/section/BookingSteps";
 import FeaturedRoom from "@/components/section/FeaturedRoom";
-// import FeaturedProduct from "@/components/section/FeaturedProduct";
+import { useEffect } from "react";
+import FAQSection from "@/components/section/FAQSection";
+
 
 const HomePage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
-      <Helmet>
-        <title>Home - Nexus Reserve</title>
-      </Helmet>
+      <HelmetProvider>
+        <Helmet>
+          <title>Home - Nexus Reserve</title>
+        </Helmet>
+      </HelmetProvider>
       <Hero />
       <Service />
-      <FeaturedRoom/>
+      <FeaturedRoom />
       <CustomerReview />
-      <BookingSteps/>
-      <WhyChooseUs/>
+      <BookingSteps />
+      <FAQSection/>
+      <WhyChooseUs />
     </div>
   );
 };

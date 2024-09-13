@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { motion } from "framer-motion";
 
-
 interface TeamMember {
     name: string;
     role: string;
@@ -62,8 +61,6 @@ const AboutUs: React.FC = () => {
                 </Helmet>
             </HelmetProvider>
             <div className="container mx-auto p-4">
-                {/* <div className="container mx-auto"> */}
-                <div className="mx-auto">
                     <motion.h1
                         className="text-4xl font-bold text-center text-gray-800 mb-4"
                         initial={{ opacity: 0, y: -50 }}
@@ -141,7 +138,6 @@ const AboutUs: React.FC = () => {
                     </motion.section>
                 </div>
             </div>
-        </div>
     );
 };
 

@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { useUpdateProductMutation } from '@/redux/api/baseApi';
-import { clearCart } from '@/redux/feature/CartSlice';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import OrderSummary from '../components/card/OrderSummary';
-import { Helmet } from 'react-helmet';
-import CheckoutForm from '@/components/Form/CheckoutForm';
-import { calculateTotals } from '@/utils/calculateTotals';
-
-
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import ShippingAndPayment from '@/components/Form/ShippingAndPayment';
+import BookingSummary from '@/components/Form/BookingSummary';
 
 const Checkout: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const cartItems = useAppSelector((state) => state.cart.items);
-  const [updateProduct] = useUpdateProductMutation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -26,8 +21,6 @@ const Checkout: React.FC = () => {
     paymentMethod: 'Cash On Delivery',
   });
 
-  const { subtotal, shipping, taxes, total } = calculateTotals(cartItems);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -36,60 +29,63 @@ const Checkout: React.FC = () => {
     }));
   };
 
+  const isFormValid = () => {
+    return (
+      formData.firstName &&
+      formData.lastName &&
+      formData.email &&
+      formData.phone &&
+      formData.address &&
+      formData.paymentMethod
+    );
+  };
+
   const handlePlaceOrder = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.paymentMethod === 'Stripe') {
-      // Prevent Stripe payment and show a message
-      toast.error('Stripe payment are currently not accepted.! Please select Cash On Delivery.');
+
+    if (!isFormValid()) {
+      toast.error('Please fill out all required fields.');
       return;
     }
+
+    if (formData.paymentMethod === 'Stripe') {
+      toast.error('Stripe payments are currently not accepted! Please select Cash On Delivery.');
+      return;
+    }
+
     try {
-      // Update stock for each product in the cart
-      await Promise.all(
-        cartItems.map((item) =>
-          updateProduct({
-            id: item?._id,
-            product: { quantity: item.quantity - item.cartQuantity }, // Deduct quantity from stock
-          }).unwrap()
-        )
-      );
-
-      // Clear cart after successful order
-      dispatch(clearCart());
-
       // Redirect to success page
       navigate('/success');
     } catch (error) {
       console.error('Failed to place order:', error);
-      toast.error('Failed to place order')
+      toast.error('Failed to place order');
     }
   };
 
   return (
     <div>
-      <Helmet>
-        <title>Checkout - Mech Arcade</title>
-      </Helmet>
-      <div className="container mx-auto p-4 md:p-6">
-        <form onSubmit={handlePlaceOrder} className="flex flex-col md:flex-row gap-6">
-          {/* Shipping Address Box */}
-          <CheckoutForm formData={formData} handleInputChange={handleInputChange} />
-          {/* Order Summary Box */}
-          <div className="bg-white p-4 md:p-6 rounded-lg shadow-lg border border-gray-200 w-full md:w-80 self-start">
-            <OrderSummary
-              subtotal={subtotal}
-              shipping={shipping}
-              taxes={taxes}
-              total={total}
-            />
-            <button
-              type="submit"
-              className="w-full px-6 py-3 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700"
-            >
-              Place Order
-            </button>
-          </div>
-        </form>
+      <HelmetProvider>
+        <Helmet>
+          <title>Checkout - Nexus Reserve</title>
+        </Helmet>
+      </HelmetProvider>
+      <div className="max-w-7xl mx-auto p-2 md:p-8 rounded-lg mt-10 border border-gray-300">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 flex items-center justify-center">
+          Checkout
+        </h2>
+        <div className="container mx-auto p-4 md:p-6">
+          <form onSubmit={handlePlaceOrder} className="flex flex-col md:flex-row gap-6">
+            {/* Shipping and Payment Form */}
+            <div className="flex-1">
+              <ShippingAndPayment formData={formData} handleInputChange={handleInputChange} />
+            </div>
+
+            {/* Booking Summary */}
+            <div className="flex-1 p-6 rounded-lg shadow-md bg-white ">
+              <BookingSummary />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

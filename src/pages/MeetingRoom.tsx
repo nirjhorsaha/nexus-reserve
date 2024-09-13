@@ -22,8 +22,8 @@ const MeetingRoom = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  console.log(capacityFilter, priceFilter)
-  console.log(capacityRange, priceRange)
+  // console.log(capacityFilter, priceFilter)
+  // console.log(capacityRange, priceRange)
   const debouncedSearchTerm = useDebounce(searchTerm, 400); // debounce search 
 
   useEffect(() => {
@@ -180,7 +180,8 @@ const sortedRooms = filteredRooms.sort((a, b) => {
         {error ? (
           <div className="flex justify-center items-center h-[60vh]">
             <div className="text-center text-gray-600 flex flex-col items-center">
-              <ErrorComponent message='No rooms match in your search criteria.!' />
+              <ErrorComponent message='No rooms available at the moment!!' />
+              {/* <ErrorComponent message='No rooms match in your search criteria.!' /> */}
             </div>
           </div>
         ) : isLoading ? (
@@ -201,7 +202,7 @@ const sortedRooms = filteredRooms.sort((a, b) => {
           <Pagination
             current={currentPage}
             pageSize={itemsPerPage}
-            total={filteredRooms.length} // Use length of filteredRooms for pagination
+            total={filteredRooms?.length} // Use length of filteredRooms for pagination
             onChange={(page) => setCurrentPage(page)}
             showSizeChanger={false}
             className="ant-pagination"
