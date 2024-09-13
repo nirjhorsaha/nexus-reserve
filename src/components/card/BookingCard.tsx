@@ -21,7 +21,7 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
         switch (booking?.isConfirmed) {
             case "confirmed":
                 return (
-                    <span className="text-green-600 font-semibold px-2 py-1">Confirmed</span>
+                    <span className="text-green-600 font-semibold">Confirmed</span>
                 );
             case "unconfirmed":
                 return (
@@ -49,7 +49,7 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
                 );
             default:
                 return (
-                    <span className="text-gray-600 font-semibold px-2 py-1 bg-zinc-200 rounded-xl">Pending</span>
+                    <span className="text-gray-600 font-semibold px-1 md:px-2 md:py-1 md:bg-zinc-200 md:rounded-xl">Pending</span>
                 );
         }
     };
@@ -95,14 +95,21 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
                         <strong>Status:</strong> {renderStatus()}
                     </p>
                     <p className="text-gray-600 ">
-                        <strong >Booking Status:</strong> <span className="px-2 py-1 bg-zinc-200 rounded-xl">{renderBookingStatus()}</span>
+                        <strong >Booking Confirmation:</strong> <span className="">{renderBookingStatus()}</span>
                     </p>
-                    <p className="text-lg font-bold text-gray-700">
-                        <strong>Total:</strong> ${booking?.totalAmount}
+                    <p className=" font-bold text-gray-700">
+                        <strong>Total Amount:</strong> ${booking?.totalAmount}
                     </p>
+                    {/* {
+                        booking?.isConfirmed === 'confirmed' ? (
+                            <p className="text-lg font-bold text-gray-700 px-2 py-1 bg-zinc-200 rounded-xl">
+                                <strong>Transaction ID :</strong> {booking?.transactionID}
+                            </p>
+                        ) : ('')
+                    } */}
                 </div>
                 {/* For large & Medium device -> Cancel Booking Button */}
-                {booking?.isConfirmed === "unconfirmed" && (
+                {booking?.isConfirmed === "unconfirmed" ? (
                     <div className="text-right hidden sm:block">
                         <button
                             onClick={() => setIsModalVisible(true)}
@@ -111,6 +118,13 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
                             Cancel Booking
                         </button>
                     </div>
+                ) : (
+                    <div>
+
+                        <p className="text-lg font-bold text-gray-700 ">
+                            <strong>Transaction ID :</strong> {booking?.transactionID}
+                        </p>
+                    </div>
                 )}
             </div>
 
@@ -118,16 +132,16 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
             <div className="mt-6">
                 <p className="text-xl font-semibold text-gray-700">Room Details:</p>
                 <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-                    <p className="text-gray-600 bg-zinc-100 rounded-lg p-2">
+                    <p className="text-gray-600 bg-zinc-200 rounded-lg p-2">
                         <strong>Amenities:</strong> {booking?.room.amenities.join(", ")}
                     </p>
-                    <p className="text-gray-600 bg-zinc-100 rounded-lg p-2">
+                    <p className="text-gray-600 bg-zinc-200 rounded-lg p-2">
                         <strong>Capacity:</strong> {booking?.room.capacity} people
                     </p>
-                    <p className="text-gray-600 bg-zinc-100 rounded-lg p-2">
+                    <p className="text-gray-600 bg-zinc-200 rounded-lg p-2">
                         <strong>Room No:</strong> {booking?.room.roomNo}
                     </p>
-                    <p className="text-gray-600 bg-zinc-100 rounded-lg p-2">
+                    <p className="text-gray-600 bg-zinc-200 rounded-lg p-2">
                         <strong>Price Per Slot:</strong> ${booking?.room.pricePerSlot}
                     </p>
                 </div>
@@ -141,13 +155,13 @@ const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
                         booking.slots.map((slot: TSlot) => (
                             <div
                                 key={slot?._id}
-                                className="flex flex-col sm:flex-row justify-between bg-gray-100 p-4 rounded-lg"
+                                className="flex flex-col sm:flex-row  justify-between items-center bg-zinc-200 p-3 rounded-lg"
                             >
-                                <p className="text-gray-600">
-                                    <strong>Date: {slot.date}</strong>
+                                <p className="text-gray-600 font-semibold">
+                                    Date: {slot.date}
                                 </p>
-                                <p className="text-gray-600">
-                                    <strong>Time: {slot.startTime}</strong> - <strong>{slot.endTime}</strong>
+                                <p className="text-gray-600 font-semibold">
+                                    Time: {slot.startTime} - {slot.endTime}
                                 </p>
                                 <p className="text-grey-600 font-semibold">
                                     Status:{" "}
