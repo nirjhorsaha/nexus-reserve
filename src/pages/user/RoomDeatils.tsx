@@ -2,10 +2,12 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ButtonLink from "@/components/ui/buttonLink";
 import ErrorComponent from "@/components/ui/ErrorComponent";
 import Loading from "@/components/ui/loading";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useGetSingleRoomQuery } from "@/redux/features/room/roomApi";
 import { TRoom } from "@/types";
 import { FireOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const RoomDetails = () => {
@@ -17,10 +19,10 @@ const RoomDetails = () => {
 
     const { id } = useParams();
     const { data, error, isLoading } = useGetSingleRoomQuery(id as string);
+    const { _id } = data?.data || []
+    const user = useSelector(selectCurrentUser);
 
-    if (isLoading) {
-        return <Loading />;
-    }
+    if (isLoading) return <Loading />;
 
     if (error) {
         return (
@@ -33,16 +35,16 @@ const RoomDetails = () => {
     const breadcrumbs = [
         { name: 'Home', path: '/' },
         { name: 'Rooms', path: '/meeting-room' },
-        { name: name || 'Room Details', path: `/user/rooms/${id}` },
+        { name: name || 'Room Details', path: `/${user?.role}/rooms/${id}` },
     ];
 
     return (
         <div className="py-6">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+            <div className="max-w-7xl mx-auto px-4 mt-6">
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
-                <div className="flex flex-col lg:flex-row -mx-4 relative md:border md:rounded-xl md:p-6">
-                    <div className="lg:flex-1 px-4">
-                        <div className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center">
+                <div className="flex flex-col lg:flex-row -mx-4 relative border md:border-2 rounded-xl md:p-6 md:gap-x-4 lg:gap-x-6">
+                    <div className="lg:flex-1 p-4 md:p-0">
+                        <div className="h-64 md:h-80 rounded-lg= bg-gray-100 mb-4 flex items-center justify-center">
                             {images[imageIndex] ? (
                                 <img
                                     src={images[imageIndex]}
@@ -73,11 +75,11 @@ const RoomDetails = () => {
                         </div>
                     </div>
 
-                    <div className="lg:flex-1 px-4">
+                    <div className="lg:flex-1 p-4 md:p-0">
                         {/* button for large device */}
                         <div className="hidden lg:block absolute top-8 right-4 z-10">
                             <ButtonLink
-                                to="/user/bookings"
+                                to={`/${user?.role}/bookings/${_id}`}
                                 text="Book Now"
                                 className="w-full"
                             />
@@ -94,7 +96,7 @@ const RoomDetails = () => {
                             </div>
                             <div className="flex-1">
                                 <p className="text-blue-900 text-xl font-semibold">Save 12%</p>
-                                <p className="text-gray-400 text-sm">Inclusive of all Taxes.</p>
+                                <p className="text-gray-600 text-sm">Inclusive of all Taxes.</p>
                             </div>
                         </div>
 
@@ -109,10 +111,10 @@ const RoomDetails = () => {
                                     { label: 'Capacity', value: `${capacity} People` },
                                 ].map((detail, index) => (
                                     <div key={index} className="flex-1">
-                                        <p className="text-gray-600 bg-zinc-200 inline-block p-2 rounded-lg">
-                                            <strong>{detail.label}:</strong> {detail.value}
+                                        <p className="text-gray-600 bg-zinc-100 inline-block p-2 rounded-lg">
+                                            <strong>{detail?.label}:</strong> {detail?.value}
                                         </p>
-                                    </div>
+                                    </div> 
                                 ))}
                             </div>
                         </div>
@@ -140,7 +142,7 @@ const RoomDetails = () => {
                 {/* book now button for small and medium device */}
                 <div className="lg:hidden mt-6 flex items-center justify-center">
                     <ButtonLink
-                        to="/user/bookings"
+                        to={`/${user?.role}/bookings/${_id}`}
                         text="Book Now"
                         className="w-full text-center"
                     />
