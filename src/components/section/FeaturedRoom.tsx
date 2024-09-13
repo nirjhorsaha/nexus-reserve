@@ -12,7 +12,7 @@ const FeaturedRoom = () => {
 
     if (isLoading) {
         return (
-            <div className="py-12 max-w-7xl mx-auto">
+            <div className="max-w-7xl py-12 mx-auto px-8 md:px-0">
                 <div className="max-w-7xl mx-auto">
                     <Section
                         icon={TbBrandFeedly}
@@ -38,7 +38,7 @@ const FeaturedRoom = () => {
 
     if (isError) {
         return (
-            <div className="py-12 max-w-7xl mx-auto">
+            <div className="max-w-7xl py-12 mx-auto px-8 md:px-0">
                 <div className="max-w-7xl mx-auto ">
                     <Section
                         icon={TbBrandFeedly}
@@ -51,7 +51,7 @@ const FeaturedRoom = () => {
     }
 
     return (
-        <div className="max-w-7xl py-12 mx-auto">
+        <div className="max-w-7xl py-12 mx-auto px-8 md:px-0">
             <div className=" ">
                 <Section
                     icon={TbBrandFeedly}

@@ -51,14 +51,16 @@ const FAQSection = () => {
                         <motion.div
                             key={item?.id}
                             data-id={item?.id}
-                            className={`accordion border border-solid border-gray-300 p-4 rounded-xl ${openAccordion === item?.id ? 'bg-indigo-50 border-indigo-600' : ''} mb-4 lg:p-4`}
+                            className={`accordion border border-solid border-gray-300 p-4 rounded-xl 
+                                ${openAccordion === item?.id ? 'bg-indigo-50 border-indigo-600' : ''} mb-4 lg:p-4`}
                             initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: inViewItems.has(item?.id) ? 1 : 0, y: inViewItems.has(item?.id) ? 0 : 50 }}
                             transition={{ duration: 0.5, ease: "easeOut" }}
                             layout
                         >
                             <button
-                                className="accordion-toggle group inline-flex items-center justify-between text-left text-lg font-normal leading-8 text-gray-900 w-full"
+                                className="accordion-toggle group inline-flex items-center justify-between text-left text-lg font-normal leading-8 
+                                text-gray-900 w-full"
                                 aria-controls={`collapse-${item?.id}`}
                                 onClick={() => toggleAccordion(item?.id)}
                             >

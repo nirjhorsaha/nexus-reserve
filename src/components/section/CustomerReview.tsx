@@ -10,8 +10,8 @@ import reviewsData from '../../data/CustomerReviews.json';
 const CustomerReview: React.FC = () => {
   useEffect(() => {
     AOS.init({
-      duration: 800, // Duration of the animation
-      easing: 'ease-out', // Easing function
+      duration: 800,
+      easing: 'ease-out', 
     });
   }, []);
 

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Steps } from 'antd';
 import { CalendarOutlined, ClockCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS CSS
+import 'aos/dist/aos.css';
 
 const { Step } = Steps;
 
