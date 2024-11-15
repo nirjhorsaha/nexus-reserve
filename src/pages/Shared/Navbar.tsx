@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     if (token) {
       const user = verifyToken(token);
-      // console.log('Verified User:', user); // Check if the user object is correct
+      // console.log('Verified User:', user); 
       setIsUser(user);
     } else {
       setIsUser(null);
