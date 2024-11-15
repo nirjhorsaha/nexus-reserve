@@ -22,30 +22,30 @@ const WhyChooseUs: React.FC = () => {
 
     return (
         <div className="py-12 max-w-7xl mx-auto px-8 md:px-0">
-                <Section
-                    icon={MdOutlineQuestionAnswer}
-                    title="Why Choose Us?"
-                    subtitle="We offer a range of benefits to ensure the best experience for our customers"
-                />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                    {features.map((feature, index) => (
-                        <div
-                            key={index}
-                            className="group p-6 bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-150"
-                            data-aos={feature.aos}
-                            data-aos-delay={index * 100} // Staggered delay
-                        >
-                            <div className="flex items-center justify-center mb-4">
+            <Section
+                icon={MdOutlineQuestionAnswer}
+                title="Why Choose Us?"
+                subtitle="We offer a range of benefits to ensure the best experience for our customers"
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                {features.map((feature, index) => (
+                    <div
+                        key={index}
+                        className="group p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-150"
+                        data-aos={feature.aos}
+                        data-aos-delay={index * 100} // Staggered delay
+                    >
+                        <div className="flex items-center justify-center mb-4">
                             {iconMap[feature.iconName]}
-                            </div>
-                            <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                                {feature.title}
-                            </h3>
-                            <p className="text-gray-600">{feature.description}</p>
                         </div>
-                    ))}
-                </div>
+                        <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                            {feature.title}
+                        </h3>
+                        <p className="text-gray-600">{feature.description}</p>
+                    </div>
+                ))}
             </div>
+        </div>
     );
 };
 

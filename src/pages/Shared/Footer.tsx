@@ -93,7 +93,7 @@ const Footer = () => (
                                 >
                                     <FaEnvelope className="size-4 text-black" />
                                     <span className="text-black transition group-hover:text-blue-600">
-                                        info@nexusarcade.com
+                                        info@nexusreserve.com
                                     </span>
                                 </a>
                             </li>

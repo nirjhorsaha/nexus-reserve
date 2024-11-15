@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "../../api/baseApi";
 
+// Injecting booking related endpoints into the base API
 const bookingApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllBookings: builder.query({
@@ -10,6 +10,7 @@ const bookingApi = baseApi.injectEndpoints({
             }),
             providesTags: ["bookings"],
         }),
+
         getSingleBooking: builder.query({
             query: (id: string) => ({
                 url: `/bookings/${id}`,
@@ -17,6 +18,7 @@ const bookingApi = baseApi.injectEndpoints({
             }),
             providesTags: ["bookings"],
         }),
+
         getMyBookings: builder.query({
             query: () => ({
                 url: "/bookings/user/my-bookings",
@@ -24,6 +26,7 @@ const bookingApi = baseApi.injectEndpoints({
             }),
             providesTags: ["bookings"],
         }),
+
         createBooking: builder.mutation({
             query: (newBooking) => ({
                 url: "/bookings",
@@ -32,6 +35,7 @@ const bookingApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["bookings"],
         }),
+
         updateBooking: builder.mutation({
             query: ({ id, updatedBooking }) => ({
                 url: `/bookings/${id}`,
@@ -40,6 +44,7 @@ const bookingApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["bookings"],
         }),
+        
         deleteBooking: builder.mutation({
             query: (id) => ({
                 url: `/bookings/${id}`,

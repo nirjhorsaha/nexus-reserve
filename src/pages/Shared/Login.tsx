@@ -24,8 +24,9 @@ const Login: React.FC = () => {
     }, []);
 
     const { handleSubmit, control, formState: { errors } } = useForm<LoginFormInputs>({
+        //! Default value (for development only)
         defaultValues: {
-            email: 'test@programming-hero.com',  //! Default value (for development only)
+            email: 'test@demouser.com',  
             password: 'test-password',
             remember: true,
         },

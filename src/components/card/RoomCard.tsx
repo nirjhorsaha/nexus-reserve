@@ -4,7 +4,8 @@ import { TRoom } from '@/types';
 import { useAppSelector } from '@/redux/hooks';
 import { useCurrentToken } from '@/redux/features/auth/authSlice';
 import { verifyToken } from '@/utils/verifyToken';
-import { FaUsers } from 'react-icons/fa'; 
+import { UsergroupDeleteOutlined } from '@ant-design/icons';
+
 
 interface RoomCardProps {
     room?: TRoom;
@@ -14,7 +15,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
     const { images, name, capacity, pricePerSlot, _id } = room || {};
 
     const token = useAppSelector(useCurrentToken);
-
+    
     let isUser;
 
     if (token) {
@@ -22,7 +23,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
     }
 
     return (
-        <div className="bg-white p-4 rounded-lg shadow-md">
+        <div className="border border-gray-300 rounded-2xl p-5 transition-all duration-300 hover:border-blue-600">
             <img
                 src={images?.[0] || 'https://via.placeholder.com/300'}
                 alt={name}
@@ -34,7 +35,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
                     <h3 className="font-semibold text-lg text-blue-600">{`$${pricePerSlot} per slot`}</h3>
                 </div>
                 <p className="text-gray-600 flex items-center mt-1">
-                    <FaUsers className="h-4 w-5 text-gray-600 mr-1" />
+                    <UsergroupDeleteOutlined className="h-4 w-5 text-gray-600 mr-1" />
                     {`Capacity: ${capacity}`}
                 </p>
             </div>

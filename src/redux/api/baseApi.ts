@@ -11,8 +11,7 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-    // baseUrl: import.meta.env.VITE_SERVER_URL,
-    baseUrl: "https://nexus-reserve-server.vercel.app/api",
+    baseUrl: import.meta.env.VITE_SERVER_URL,
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;

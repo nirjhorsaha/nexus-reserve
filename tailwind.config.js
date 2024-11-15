@@ -21,6 +21,9 @@ export const theme = {
     fontFamily: {
       Nunito: ["Nunito"]
     },
+    // backgroundImage: {
+    //   'picture': "url('./src/assets/bg-image.png')"
+    // },
     colors: {
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",

@@ -2,6 +2,7 @@
 import { baseApi } from "../../api/baseApi";
 import { TResponseRedux, TRoom } from "@/types";
 
+// Injecting room related endpoints into the base API
 const roomApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllRooms: builder.query({
@@ -26,6 +27,7 @@ const roomApi = baseApi.injectEndpoints({
             },
             providesTags: ["rooms"],
         }),
+
         getSingleRoom: builder.query({
             query: (id: string) => ({
                 url: `/rooms/${id}`,
@@ -33,6 +35,7 @@ const roomApi = baseApi.injectEndpoints({
             }),
             providesTags: ["rooms"],
         }),
+
         createRoom: builder.mutation<TRoom, TRoom>({
             query: (room) => ({
                 url: `/rooms`,
@@ -41,6 +44,7 @@ const roomApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["rooms"],
         }),
+
         updateRoom: builder.mutation({
             query: ({ id, room }) => ({
                 url: `rooms/${id}`,
@@ -49,6 +53,7 @@ const roomApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["rooms"],
         }),
+        
         deleteRoom: builder.mutation({
             query: (id) => ({
                 url: `rooms/${id}`,

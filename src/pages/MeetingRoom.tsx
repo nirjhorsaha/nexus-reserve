@@ -146,33 +146,33 @@ const sortedRooms = filteredRooms.sort((a, b) => {
             placeholder="Search rooms..."
             value={searchTerm}
             onChange={handleSearchChange}
-            className="border py-3 px-3 rounded mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4"
+            className="border py-3 px-3 rounded-lg mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4"
           />
-          <select onChange={handleCapacityChange} value={capacityRange ? capacityRange[1].toString(): ''} className="border p-2 rounded mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4">
+          <select onChange={handleCapacityChange} value={capacityRange ? capacityRange[1].toString(): ''} className="border p-2 rounded-lg mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4">
             <option value="">Capacity</option>
             <option value="10">10+</option>
             <option value="20">20+</option>
             <option value="30">30+</option>
           </select>
-          <select onChange={handlePriceChange} value={priceRange ? priceRange[1].toString() : ''} className="border p-2 rounded mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4">
+          <select onChange={handlePriceChange} value={priceRange ? priceRange[1].toString() : ''} className="border p-2 rounded-lg mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4">
             <option value="">Price</option>
             <option value="50">Up to $50</option>
             <option value="100">Up to $100</option>
             <option value="200">Up to $200</option>
           </select>
-          <select onChange={handleSortChange} value={sortOption ?? ''} className="border p-2 rounded mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4">
+          <select onChange={handleSortChange} value={sortOption ?? ''} className="border p-2 rounded-lg mb-2 sm:mb-0 w-full md:w-1/3 lg:w-1/4">
             <option value="">Select</option>
             <option value="asc">Low to High</option>
             <option value="desc">High to Low</option>
           </select>
           <button
             onClick={clearFilters}
-            className="block sm:hidden border p-2 rounded bg-gray-300 hover:bg-gray-400">
+            className="block sm:hidden border p-2 rounded-lg bg-gray-300 hover:bg-gray-400">
             Clear Filters
           </button>
           <button
             onClick={clearFilters}
-            className="hidden sm:flex border p-1 rounded bg-gray-300 hover:bg-gray-400">
+            className="hidden sm:flex border p-1 rounded-lg bg-gray-300 hover:bg-gray-400">
             <CloseOutlined className='text-3xl' />
           </button>
         </div>

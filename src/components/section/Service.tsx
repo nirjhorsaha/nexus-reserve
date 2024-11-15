@@ -52,7 +52,7 @@ const Service = () => {
         {services.map(service => (
           <div
             key={service?.id}
-            className="flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300"
+            className="flex flex-col items-center justify-center  p-4 rounded-lg   transition duration-300"
             data-aos="zoom-in"
           >
             <img
