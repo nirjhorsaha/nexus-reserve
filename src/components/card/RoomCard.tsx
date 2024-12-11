@@ -1,9 +1,9 @@
 import React from 'react';
 import ButtonLink from '../ui/buttonLink';
 import { TRoom } from '@/types';
-import { useAppSelector } from '@/redux/hooks';
-import { useCurrentToken } from '@/redux/features/auth/authSlice';
-import { verifyToken } from '@/utils/verifyToken';
+// import { useAppSelector } from '@/redux/hooks';
+// import { useCurrentToken } from '@/redux/features/auth/authSlice';
+// import { verifyToken } from '@/utils/verifyToken';
 import { UsergroupDeleteOutlined } from '@ant-design/icons';
 
 
@@ -14,13 +14,13 @@ interface RoomCardProps {
 const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
     const { images, name, capacity, pricePerSlot, _id } = room || {};
 
-    const token = useAppSelector(useCurrentToken);
+    // const token = useAppSelector(useCurrentToken);
     
-    let isUser;
+    // let isUser;
 
-    if (token) {
-        isUser = verifyToken(token);
-    }
+    // if (token) {
+    //     isUser = verifyToken(token);
+    // }
 
     return (
         <div className="border border-gray-300 rounded-2xl p-5 transition-all duration-300 hover:border-blue-600">
@@ -41,7 +41,8 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
             </div>
             <ButtonLink
                 key={_id}
-                to={isUser?.role === 'user' ? `/${isUser?.role}/rooms/${_id}` : '/login'}
+                // to={isUser?.role === 'user' ? `/${isUser?.role}/rooms/${_id}` : '/login'}
+                to={`/rooms/${_id}`}
                 text="See Details"
                 className="block mt-4 text-center w-full"
             />

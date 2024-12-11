@@ -14,6 +14,7 @@ import ProtectedRoute from "@/components/layout/ProtectedRoute";
 import { adminPaths } from "./adminRoute";
 import UserDashboard from "@/pages/user/UserDashboard";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
+import RoomDetails from "@/pages/user/RoomDeatils";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactUs />,
+      },
+      {
+        path: 'rooms/:id',
+        element: <RoomDetails/>
       },
       {
         path: "/success",

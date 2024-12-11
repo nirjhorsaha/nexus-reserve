@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 const RoomDetails = () => {
     const [imageIndex, setImageIndex] = useState(0);
 
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -79,10 +80,15 @@ const RoomDetails = () => {
                         {/* button for large device */}
                         <div className="hidden lg:block absolute top-8 right-4 z-10">
                             <ButtonLink
-                                to={`/${user?.role}/bookings/${_id}`}
+                                to={
+                                    user?.role === 'user'
+                                        ? `/${user?.role}/bookings/${_id}`
+                                        : `/login?redirect=/user/bookings/${_id}`
+                                }
                                 text="Book Now"
                                 className="w-full"
                             />
+
                         </div>
                         <h2 className="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">{name}</h2>
                         <p className="text-gray-500 text-sm">By <span className="text-blue-600 hover:underline">Nexus Reserve</span></p>
@@ -95,8 +101,8 @@ const RoomDetails = () => {
                                 </div>
                             </div>
                             <div className="flex-1">
-                                <p className="text-blue-900 text-xl font-semibold">Save 12%</p>
-                                <p className="text-gray-600 text-sm">Inclusive of all Taxes.</p>
+                                <p className="text-blue-900 text-xl font-semibold mb-0">Save 12%</p>
+                                <p className="text-gray-600 text-sm mb-0">Inclusive of all Taxes.</p>
                             </div>
                         </div>
 
@@ -114,7 +120,7 @@ const RoomDetails = () => {
                                         <p className="text-gray-600 bg-zinc-100 inline-block p-2 rounded-lg">
                                             <strong>{detail?.label}:</strong> {detail?.value}
                                         </p>
-                                    </div> 
+                                    </div>
                                 ))}
                             </div>
                         </div>

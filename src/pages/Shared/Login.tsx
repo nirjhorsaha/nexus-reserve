@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm, Controller, FieldValues } from 'react-hook-form';
 import { Input, Button, Checkbox } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { useAppDispatch } from '@/redux/hooks';
 import { setUser } from '@/redux/features/auth/authSlice';
@@ -17,6 +17,7 @@ interface LoginFormInputs {
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -34,6 +35,10 @@ const Login: React.FC = () => {
 
     const [login] = useLoginMutation();
 
+    const queryParams = new URLSearchParams(location.search);
+    const redirectPath = queryParams.get('redirect') || '/';
+    console.log({redirectPath})
+
     const onSubmit = async (data: FieldValues) => {
         const toastId = toast.loading('Logging in');
 
@@ -49,13 +54,13 @@ const Login: React.FC = () => {
             const userData = userDetails.user;
             
             const user = verifyToken(accessToken);
-            dispatch(setUser({ user: userData, token: res.data.accessToken  }));
+            dispatch(setUser({ user: userData, token: res.data.accessToken }));
 
             // Navigate based on role
             if (user?.role === 'admin') {
                 navigate(`/${user?.role}/dashboard`);
             } else {
-                navigate('/');
+                navigate(redirectPath);
             }
             toast.success('Successfully Logged in', { id: toastId, duration: 2000 });
         } catch (err) {
