@@ -34,7 +34,7 @@ const FooterSection = ({ title, links }: { title: string; links: { to: string; t
 
 
 const Footer = () => (
-    <footer className="bg-gradient-to-r from-blue-50 via-white to-blue-100">
+    <footer className="bg-gradient-to-r from-blue-50 via-white to-blue-100 max-w-[2520px] px-2 md:px-10 xl:px-20 ">
         <div className="max-w-7xl px-4 pt-12 pb-6 mx-auto border border-x-0 border-y-2">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                 <div>
@@ -61,7 +61,7 @@ const Footer = () => (
                     </ul>
                 </div>
 
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 md:grid-cols-4">
+                <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:col-span-2 md:grid-cols-4">
                     <FooterSection
                         title="About Us"
                         links={[
@@ -88,7 +88,7 @@ const Footer = () => (
                         <ul className="mt-8 space-y-4 text-sm">
                             <li>
                                 <a
-                                    className="flex items-center justify-center sm:justify-start gap-1.5 group"
+                                    className="flex items-center sm:justify-start gap-1.5 group"
                                     href="mailto:info@nexusarcade.com"
                                 >
                                     <FaEnvelope className="size-4 text-black" />
@@ -99,7 +99,7 @@ const Footer = () => (
                             </li>
                             <li>
                                 <a
-                                    className="flex items-center justify-center sm:justify-start gap-1.5 group"
+                                    className="flex items-center sm:justify-start gap-1.5 group"
                                     href="tel:0123456789"
                                 >
                                     <FaPhone className="size-4 text-black" />
@@ -108,7 +108,7 @@ const Footer = () => (
                                     </span>
                                 </a>
                             </li>
-                            <li className="flex items-start justify-center gap-1.5 sm:justify-start">
+                            <li className="flex items-start  gap-1.5 sm:justify-start">
                                 <FaMapMarkerAlt className="size-4 text-black" />
                                 <address className="-mt-0.5 not-italic text-black">
                                     Uttara, Dhaka
