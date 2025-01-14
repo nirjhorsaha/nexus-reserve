@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-// import logo1 from '../../assets/logo-1.png';
 import logo2 from '../../assets/logo-2.png';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { logout, useCurrentToken } from '@/redux/features/auth/authSlice';
@@ -9,8 +8,7 @@ import { UserOutlined, LogoutOutlined, LoginOutlined } from '@ant-design/icons';
 import { verifyToken } from '@/utils/verifyToken';
 
 export interface IUser {
-  role: 'user' | 'admin'; // Adjust roles based on your actual roles
-  // Add other properties if necessary
+  role: 'user' | 'admin';
 }
 
 const Navbar: React.FC = () => {
@@ -23,7 +21,6 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     if (token) {
       const user = verifyToken(token);
-      // console.log('Verified User:', user); 
       setIsUser(user);
     } else {
       setIsUser(null);
@@ -94,7 +91,7 @@ const Navbar: React.FC = () => {
       top: 0,
       zIndex: 1000,
 
-    }} className="navbar bg-gradient-to-r from-blue-50 via-white to-blue-100">
+    }} className="navbar bg-gradient-to-r from-blue-50 via-white to-blue-100 max-w-[2520px] mx-auto 2xl:px-40">
       {/* }} className="navbar bg-base-100 mb-5"> */}
       <div className="navbar-start">
         <div className="dropdown">
@@ -102,7 +99,7 @@ const Navbar: React.FC = () => {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost lg:hidden"
+              className="btn btn-ghost lg:hidden "
               aria-label="Toggle navigation"
               aria-haspopup="true"
               aria-expanded="false"
@@ -112,8 +109,7 @@ const Navbar: React.FC = () => {
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+                stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -126,8 +122,7 @@ const Navbar: React.FC = () => {
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[2] mt-3 w-52 p-2 shadow"
-            aria-label="Dropdown menu"
-          >
+            aria-label="Dropdown menu">
             <li><CustomNavLink to="/">Home</CustomNavLink></li>
             <li><CustomNavLink to="/meeting-room">Meeting Rooms</CustomNavLink></li>
             <li><CustomNavLink to="/about">About Us</CustomNavLink></li>
