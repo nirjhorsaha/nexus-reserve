@@ -8,7 +8,7 @@ import { LogoutOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { logout } from '@/redux/features/auth/authSlice';
 import { Helmet, HelmetProvider } from "react-helmet-async";
-
+import logo3 from '../../assets/logo-3.png';
 
 const { Header, Sider, Content } = Layout;
 
@@ -31,11 +31,11 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <Layout >
-       <HelmetProvider>
-                <Helmet>
-                    <title>Admin Dashboard - Nexus Reserve</title>
-                </Helmet>
-            </HelmetProvider>
+      <HelmetProvider>
+        <Helmet>
+          <title>Admin Dashboard - Nexus Reserve</title>
+        </Helmet>
+      </HelmetProvider>
       {/* Sidebar */}
       <Sider
         collapsible
@@ -44,11 +44,12 @@ const AdminDashboard: React.FC = () => {
         width={250}
         style={{ height: '100vh', position: 'sticky', top: '0', left: '0' }}
       >
-         <div className="text-center text-white p-3 font-Nunito flex flex-col md:flex-row justify-center items-center">
+        <div className="text-center text-white p-3 font-Nunito flex flex-col md:flex-row justify-center items-center">
           {!collapsed && (
-            <span className='bg-slate-800 px-6 py-1 text-base rounded-lg md:px-10 md:py-2 md:text-lg'>
-              Nexus Reserve
-            </span>
+            // <span className='bg-slate-800 px-6 py-1 text-base rounded-lg md:px-10 md:py-2 md:text-lg'>
+            //   Nexus Reserve
+            // </span>
+            <img src={logo3} alt="Logo" className="h-12 lg:h-20 p-1" />
           )}
         </div>
 
