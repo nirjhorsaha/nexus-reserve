@@ -24,12 +24,12 @@ const Login: React.FC = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    const { handleSubmit, control, formState: { errors } } = useForm<LoginFormInputs>({
+    const { handleSubmit, control,reset, formState: { errors } } = useForm<LoginFormInputs>({
         //! Default value (for development only)
         defaultValues: {
-            email: 'test@demouser.com',  
-            password: 'test-password',
-            remember: true,
+            email: '',
+            password: '',
+            remember: false,
         },
     });
 
@@ -37,7 +37,23 @@ const Login: React.FC = () => {
 
     const queryParams = new URLSearchParams(location.search);
     const redirectPath = queryParams.get('redirect') || '/';
-    console.log({redirectPath})
+    console.log({ redirectPath })
+    
+    const setAdminDefaults = () => {
+        reset({
+            email: 'web@programming-hero.com',
+            password: 'ph-password',
+            remember: true,
+        });
+    };
+
+    const setUserDefaults = () => {
+        reset({
+            email: 'test@demouser.com',
+            password: 'test-password',
+            remember: true,
+        });
+    };
 
     const onSubmit = async (data: FieldValues) => {
         const toastId = toast.loading('Logging in');
@@ -80,6 +96,14 @@ const Login: React.FC = () => {
                     <h1 className="text-2xl font-bold leading-tight tracking-tight text-gray-900 md:text-3xl mb-6 dark:text-white">
                         Sign in to your account
                     </h1>
+                    <div className="flex justify-center gap-2 mb-4 w-full">
+                        <Button onClick={setUserDefaults} type ='primary' className="">
+                            User Login
+                        </Button>
+                        <Button onClick={setAdminDefaults} className="">
+                            Admin Login
+                        </Button>
+                    </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
